@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "client": "webpack-dev-server --open",
-    "server": "babel-node src/server/server"
+    "server": "nodemon --exec babel-node src/server/server"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,10 @@
   "dependencies": {
     "babel-loader": "^8.1.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "socket.io-client": "^2.3.0",
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -30,6 +33,10 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.9.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "nodemon": "^2.0.3",
+    "socket.io": "^2.3.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
