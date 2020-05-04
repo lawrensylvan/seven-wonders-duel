@@ -7,6 +7,8 @@ import reducers from './reducers'
 
 const io = socketIO('http://localhost:7777')
 
+io.on('server error', (error) => alert(`Got error from server : ${error}`))
+
 const store = createStore(
     combineReducers(reducers),
     composeWithDevTools(

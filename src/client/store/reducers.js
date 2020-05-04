@@ -1,15 +1,24 @@
 
+const session = (session = {isLoggedIn:false}, action) => {
+    switch (action.type) {
+        case 'loggedIn':
+            return {
+                isLoggedIn: true,
+                name: action.name
+            }
+
+        default:
+            return session;
+    }
+}
+
 const tables = (tables = [], action) => {
     switch (action.type) {
-
-        case 'server/createTable':
-            return tables
-
         case 'tableCreated':
             return [...tables, action.table]
 
-        case 'server/getAllTables':
-            return tables
+        case 'tableUpdated':
+            return tables.map(t => t.id===action.table.id ? action.table : t)
 
         case 'refreshTables':
             return action.tables
@@ -20,7 +29,8 @@ const tables = (tables = [], action) => {
 }
 
 const reducers = {
-    tables
+    session,
+    tables,
 }
 
 export default reducers

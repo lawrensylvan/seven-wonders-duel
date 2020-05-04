@@ -1,36 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import { Provider } from 'react-redux'
-import socketIO from 'socket.io-client'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Lobby from './Lobby'
 import Table from './Table'
-import store from '../store/store'
+import Login from './Login'
 
-const App = () => (
+const App = ({session}) => (
+    <Router>        
+        <h1>Welcome to 7 Wonders Duel !</h1>
 
-    <Router>
-        <Provider store={store}>
-            <h1>Welcome to 7 Wonders Duel !</h1>
+        <Switch>
 
-            <Switch>
+            <Route exact path="/">
+                <Redirect to='/login'/>
+            </Route>
 
-                <Route exact path="/">
-                    <Redirect to='/lobby'/>
-                </Route>
+            <Route exact path="/login">
+                <Login/>
+            </Route>
 
-                <Route exact path="/lobby">
-                    <Lobby/>
-                </Route>
-                        
-                <Route exact path="/table/:id">
-                    <Table/>
-                </Route>
+            <Route exact path="/lobby">
+                {session.isLoggedIn
+                    ?   <Lobby/>
+                    :   <Redirect to='/login'/>}
+            </Route>
+                    
+            <Route exact path="/table/:id">
+                <Table/>
+            </Route>
 
-            </Switch>
-        </Provider>
+        </Switch>
     </Router>
-
 )
 
-export default App
+const mapStateToProps = (state, ownProps) => {
+    return {
+        session: state.session,
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+
+})
+
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
+
+export default ConnectedApp

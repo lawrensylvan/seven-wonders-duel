@@ -4,7 +4,14 @@ import socketIO from 'socket.io'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 
-import {connect, disconnect, createTable, joinTable, getAllTables, login } from './lobby'
+import {
+    connect,
+    disconnect,
+    createTable,
+    joinTable,
+    getAllTables,
+    login,
+    readyToPlay} from './lobby'
 
 // Initializing Express server
 const app = express()
@@ -41,12 +48,18 @@ io.on('connect', (socket) => {
     // Listening to redux actions from clients
     socket.on('action', action => {
         console.info(`Socket $${socket.id} sent action ${action.type}`)
-        switch (action.type) {
-            case 'server/login':        login(action, socket);          break
-            case 'server/createTable':  createTable(action, socket);    break
-            case 'server/joinTable':    joinTable(action, socket);      break
-            case 'server/getAllTables': getAllTables(action, socket);   break
-            default: break;
+        try {
+            switch (action.type) {
+                case 'server/login':        login(action, socket);          break
+                case 'server/createTable':  createTable(action, socket);    break
+                case 'server/joinTable':    joinTable(action, socket);      break
+                case 'server/readyToPlay':  readyToPlay(action, socket);    break
+                case 'server/getAllTables': getAllTables(action, socket);   break
+                default: break;
+            }
+        } catch(err) {
+            console.error(err)
+            socket.emit('server error', err)
         }
     })
 
