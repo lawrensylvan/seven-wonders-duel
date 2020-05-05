@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const Lobby = ({tables, createTable, joinTable, getAllTables, readyToPlay, session}) => {
@@ -13,7 +13,7 @@ const Lobby = ({tables, createTable, joinTable, getAllTables, readyToPlay, sessi
 
         <ul>
             {tables.map(t => {
-
+                
                 const me = session.name
                 const isMine = t.players.includes(me)
                 const iAmReady = t.playersReady.includes(me)
@@ -35,6 +35,9 @@ const Lobby = ({tables, createTable, joinTable, getAllTables, readyToPlay, sessi
                         {isMine && isReady &&
                             <Redirect to={`/table/${t.id}`} />
                         }
+                        {isMine && inProgress &&
+                            <Link to={`/table/${t.id}`}>Resume !</Link>
+                        }
                         
                     </li>
                 )
@@ -55,31 +58,29 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 
+    getAllTables: () => {
+        dispatch({
+            type: 'server/getAllTables'
+        })
+    },
+
     createTable: () => {
-        console.log('Let s create table')
         dispatch({
             type: 'server/createTable'
         })
     },
 
-    joinTable: (id) => {
-        console.log('join table ' + id)
+    joinTable: (tableId) => {
         dispatch({
             type: 'server/joinTable',
-            tableId: id
+            tableId
         })
     },
 
-    readyToPlay: (id) => {
+    readyToPlay: (tableId) => {
         dispatch({
             type: 'server/readyToPlay',
-            tableId: id
-        })
-    },
-
-    getAllTables: () => {
-        dispatch({
-            type: 'server/getAllTables'
+            tableId
         })
     }
 

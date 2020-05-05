@@ -27,7 +27,9 @@ const App = ({session}) => (
             </Route>
                     
             <Route exact path="/table/:id">
-                <Table/>
+                {session.isLoggedIn
+                        ?   <Table/>
+                        :   <Redirect to='/login'/>}
             </Route>
 
         </Switch>

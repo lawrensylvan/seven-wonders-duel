@@ -1,4 +1,4 @@
-import { State as GameState } from '../core/state'
+import { GameEngine } from '../core/engine'
 
 export const ServerState = () => ({
 
@@ -6,6 +6,7 @@ export const ServerState = () => ({
     players: [],
     playersBySocket: {},
     tables: [],
+    games: [],
 
     registerSocket(socket) {
         if(this.sockets.includes(socket)) throw 'This socket is already registered'
@@ -54,7 +55,51 @@ export const ServerState = () => ({
         if(tableId >= this.tables.length) throw 'This table does not exist'
         const table = this.tables[tableId]
         table.playerIsReady(player)
+    },
+
+    getPlayers(tableId) {
+        if(tableId >= this.tables.length) throw 'This table does not exist'
+        return this.tables[tableId].players
+    },
+
+    startGame(tableId) {
+        if(tableId >= this.tables.length) throw 'This table does not exist'
+        const table = this.tables[tableId]
+        this.games[tableId] = GameEngine()
+        table.start()
+    },
+
+    getPublicGameState4(player, tableId) {
+        if(!this.players.includes(player)) throw 'This player does not exist'
+        if(tableId >= this.tables.length) throw 'This table does not exist'
+        const table = this.tables[tableId]
+        if(!table.players.includes(player)) throw 'This player is not in this game'
+        if(!table.hasStarted()) throw 'The game has not started yet'
+        const game = this.games[tableId]
+        return game.getPublicGameState4(player)
+    },
+
+    processMove(tableId, player, move) {
+        if(!this.players.includes(player)) throw 'This player does not exist'
+        if(tableId >= this.tables.length) throw 'This table does not exist'
+        const table = this.tables[tableId]
+        if(!table.players.includes(player)) throw 'This player is not in this game'
+        if(!table.hasStarted()) throw 'The game has not started yet'
+        if(table.isOver()) throw 'The game is over'
+        const game = this.games[tableId]
+        game.processMove(player, move)
+    },
+
+    getLastGameStep4(player, tableId) {
+        if(!this.players.includes(player)) throw 'This player does not exist'
+        if(tableId >= this.tables.length) throw 'This table does not exist'
+        const table = this.tables[tableId]
+        if(!table.players.includes(player)) throw 'This player is not in this game'
+        if(!table.hasStarted()) throw 'The game has not started yet'
+        const game = this.games[tableId]
+        return game.getLastStep4(player)
     }
+
 })
 
 const Table = (id, creator) => ({
@@ -104,6 +149,17 @@ const Table = (id, creator) => ({
     start() {
         this.status = 'IN_PROGRESS'
         // TODO
+    },
+
+    hasStarted() {
+        return ![
+            'WAITING_FOR_PLAYERS_READY',
+            'WAITING_FOR_MORE_PLAYERS'
+        ].includes(this.status)
+    },
+
+    isOver() {
+        return this.status === 'FINISHED'
     }
 
 })

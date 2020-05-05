@@ -4,14 +4,7 @@ import socketIO from 'socket.io'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 
-import {
-    connect,
-    disconnect,
-    createTable,
-    joinTable,
-    getAllTables,
-    login,
-    readyToPlay} from './lobby'
+import handler from './handler'
 
 // Initializing Express server
 const app = express()
@@ -39,23 +32,23 @@ const io = socketIO(server)
 
 io.on('connect', (socket) => {
     console.info(`Socket $${socket.id} connected`)
-    connect(socket)
+    handler.connect(socket)
     socket.on('disconnect', () => {
         console.info(`Socket $${socket.id} disconnected`)
-        disconnect(socket)
+        handler.disconnect(socket)
     })
 
     // Listening to redux actions from clients
     socket.on('action', action => {
         console.info(`Socket $${socket.id} sent action ${action.type}`)
         try {
-            switch (action.type) {
-                case 'server/login':        login(action, socket);          break
-                case 'server/createTable':  createTable(action, socket);    break
-                case 'server/joinTable':    joinTable(action, socket);      break
-                case 'server/readyToPlay':  readyToPlay(action, socket);    break
-                case 'server/getAllTables': getAllTables(action, socket);   break
-                default: break;
+            if(action.type.startsWith('server/')) {
+                const actionName = action.type.substring(7)
+                if(!handler[actionName]) {
+                    socket.emit('This server action is not known')
+                } else {
+                    handler[actionName](action, socket)
+                }
             }
         } catch(err) {
             console.error(err)
