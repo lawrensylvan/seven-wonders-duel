@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../store/actions'
 
-const Lobby = ({tables, createTable, joinTable, getAllTables, readyToPlay, session}) => {
+export const Lobby = () => {
+
+    const session = useSelector(state => state.session)
+    const tables = useSelector(state => state.tables)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        getAllTables()
+        dispatch(actions.getAllTables())
     }, [])
 
     return <>
@@ -24,19 +29,30 @@ const Lobby = ({tables, createTable, joinTable, getAllTables, readyToPlay, sessi
                 
                 return (
                     <li key={t.id}>
-                            Table #{t.id} ({t.players.length}/2 players) [{t.players.join(', ')}]
+                        
+                        <span>
+                            Table #{t.id}
+                            ({t.players.length}/2 players)
+                            [{t.players.join(', ')}]
+                        </span>
 
                         {!isMine &&
-                            <button onClick={()=>joinTable(t.id)}>Join</button>
+                            <button onClick={()=>dispatch(actions.joinTable(t.id))}>
+                                Join
+                            </button>
                         }
                         {isMine && waiting4Ready && !iAmReady && 
-                            <button onClick={()=>readyToPlay(t.id)}>Ready to play !</button>
+                            <button onClick={()=>dispatch(actions.readyToPlay(t.id))}>
+                                Ready to play !
+                            </button>
                         }
                         {isMine && isReady &&
                             <Redirect to={`/table/${t.id}`} />
                         }
                         {isMine && inProgress &&
-                            <Link to={`/table/${t.id}`}>Resume !</Link>
+                            <Link to={`/table/${t.id}`}>
+                                Resume game!
+                            </Link>
                         }
                         
                     </li>
@@ -45,47 +61,6 @@ const Lobby = ({tables, createTable, joinTable, getAllTables, readyToPlay, sessi
             )}
         </ul>
 
-        <button onClick={()=>createTable()}>Create table</button>
+        <button onClick={()=>dispatch(actions.createTable())}>Create table</button>
     </>
 }
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        session: state.session,
-        tables: state.tables
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-
-    getAllTables: () => {
-        dispatch({
-            type: 'server/getAllTables'
-        })
-    },
-
-    createTable: () => {
-        dispatch({
-            type: 'server/createTable'
-        })
-    },
-
-    joinTable: (id) => {
-        dispatch({
-            type: 'server/joinTable',
-            id
-        })
-    },
-
-    readyToPlay: (tableId) => {
-        dispatch({
-            type: 'server/readyToPlay',
-            tableId
-        })
-    }
-
-})
-
-const ConnectedLobby = connect(mapStateToProps, mapDispatchToProps)(Lobby)
-
-export default ConnectedLobby

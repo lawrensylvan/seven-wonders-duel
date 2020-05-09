@@ -13,9 +13,9 @@ const store = createStore(
     combineReducers(reducers),
     composeWithDevTools(
         applyMiddleware(
-            createSocketIOMiddleware(io, 'server/')
+            createSocketIOMiddleware(io, 'server/') // actions beginning with 'server/' will be sent to server as 'action' messages
+            )
         )
-    )
 )
 
 export default store
