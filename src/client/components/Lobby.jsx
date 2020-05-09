@@ -70,10 +70,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         })
     },
 
-    joinTable: (tableId) => {
+    joinTable: (id) => {
         dispatch({
             type: 'server/joinTable',
-            tableId
+            id
         })
     },
 

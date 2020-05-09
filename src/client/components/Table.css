@@ -1,0 +1,14 @@
+
+.step {
+    color: grey;
+    border: 1px solid black;
+    transition: color 2ms ease-in-out;
+}
+
+.disappear {
+    color: white;
+}
+
+.appear {
+    color: black;
+}

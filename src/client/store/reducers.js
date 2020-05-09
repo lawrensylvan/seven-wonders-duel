@@ -1,4 +1,3 @@
-import { applyStepOnGameState } from "../../core/engine";
 
 const session = (session = {isLoggedIn:false}, action) => {
     switch (action.type) {
@@ -36,6 +35,7 @@ const games = (games = [], action) => {
             return [...games, {
                 tableId: tableId,
                 state: state,
+                steps: []
             }]
 
         case 'refreshGameState':
@@ -43,18 +43,21 @@ const games = (games = [], action) => {
                 return games.map(g => g.tableId===tableId ? {
                     ...g,
                     state: state,
+                    steps: g.steps
                 } : g)
             } else {
                 return [...games, {
                     tableId: tableId,
                     state: state,
+                    steps: []
                 }]
             }
 
         case 'gameStepPushed':
             return games.map(g => g.tableId===tableId ? {
                 ...g,
-                state: applyStepOnGameState(step, g.state)
+                state: step,
+                steps: [...g.steps, step]
             } : g)
 
         default:

@@ -4,7 +4,7 @@ import socketIO from 'socket.io'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 
-import handler from './handler'
+import { ActionHandler } from './handler'
 
 // Initializing Express server
 const app = express()
@@ -30,6 +30,8 @@ app.get('/', (req, res) => {
 // Setting up Socket.io server
 const io = socketIO(server)
 
+const handler = ActionHandler(io)
+
 io.on('connect', (socket) => {
     console.info(`Socket $${socket.id} connected`)
     handler.connect(socket)
@@ -44,7 +46,7 @@ io.on('connect', (socket) => {
         try {
             if(action.type.startsWith('server/')) {
                 const actionName = action.type.substring(7)
-                if(!handler[actionName]) {
+                if(!handler[actionName] || actionName === 'processGameEvent') {
                     socket.emit('This server action is not known')
                 } else {
                     handler[actionName](action, socket)
