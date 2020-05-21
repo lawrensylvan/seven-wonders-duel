@@ -20,7 +20,11 @@ module.exports = {
             loader: 'babel-loader'
         }, {
             test: /\.css$/, 
-            loader: "style-loader!css-loader" 
-        }]
+            loader: 'style-loader!css-loader' 
+        }, {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: ['file-loader']
+        }
+        ]
     }
 }
