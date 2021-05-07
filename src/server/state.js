@@ -35,8 +35,7 @@ export const ServerState = () => {
         },
 
         getTable(id) {
-            //if(id >= tables.length) throw 'This table does not exist'
-            return tables[id]
+            return tables.filter(t => t.id === id)[0]
         },
 
         getPlayerBySocket(socket) {
@@ -55,8 +54,8 @@ export const ServerState = () => {
 
         createTable(creator) {
             this.checkPlayerExists(creator)
-            const id = tables.length
-            const table = Table(tables.length, creator)
+            const id = tables.length + 1
+            const table = Table(id, creator)
             tables.push(table)
             return id
         },
@@ -79,9 +78,13 @@ export const ServerState = () => {
             return table.players
         },
 
+        getGame(id) {
+            return games.filter(g => g.id === id)[0]
+        },
+
         startGame(tableId) {
             const table = this.getTable(tableId)
-            games[tableId] = Game(this.getPlayers(tableId))
+            games.push(Game(this.getPlayers(tableId), tableId))
             table.start()
         },
 
@@ -90,7 +93,7 @@ export const ServerState = () => {
             const table = this.getTable(tableId)
             if(!table.players.includes(player)) throw 'This player is not in this game'
             if(!table.hasStarted()) throw 'The game has not started yet'
-            const game = games[tableId]
+            const game = this.getGame(tableId)
             return game.getGameState4(player)
         },
 
@@ -100,7 +103,7 @@ export const ServerState = () => {
             if(!table.players.includes(player)) throw 'This player is not in this game'
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
-            const game = games[tableId]
+            const game = this.getGame(tableId)
             const processor = game.getMoveProcessor(player, move)
             return processor
         },
@@ -109,7 +112,7 @@ export const ServerState = () => {
             const table = this.getTable(tableId)
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
-            const game = games[tableId]
+            const game = this.getGame(tableId)
             const processor = game.getEventProcessor(event)
             return processor
         }

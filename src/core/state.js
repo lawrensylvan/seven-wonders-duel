@@ -5,10 +5,13 @@ export const GameState = (players) => {
 
         players: players,
         toPlay: players[0],
-        board: [],
+
+        militaryPosition: 0,
+        progressTokens: ['law', 'economy', 'architecture', 'strategy', null],
+        wondersToSelect: ['greatLibrary', null, 'mausoleum', 'pyramids'],
 
         getPublicState(player) {
-            return this.board
+            return this
         }
 
     }

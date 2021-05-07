@@ -1,0 +1,328 @@
+
+* {
+  box-sizing:border-box;	/* padding+border inclus dans width/height */
+	 user-select: none;
+}
+
+body {
+	background-color : #EEEEE0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#all {
+	
+		/* Choix 1 : taille "fixe" mais qui zoom in/out en fct de l'écran */
+  position: fixed;
+	 left: 50%;
+  top: 50%;
+		transform: translate(-50%, -50%);
+	
+	 /* Choix 2 : design qui s'adapte pour créer de l'espace
+	si bcp de place, mais ne se réduit pas en fct de l'écran 
+	 position:fixed;
+     width:100%;
+     height:100%;
+  */
+  
+  display: grid; /* grid layout : similaire au swing border layout */
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 
+    "board board board"
+    "city1 pyramid city2"
+    "infos infos infos";
+  justify-items: center;
+  align-items: center;
+	
+border:2px solid black;
+}
+
+/*****************************/
+/*****   Discard pile    *****/
+/*****************************/
+
+#discard {
+  grid-area: discard;
+  justify-self: start;
+  align-self: start;
+  width:450px;
+  height:150px;
+	 position: absolute;
+		border:2px solid yellow;
+}
+
+.trash {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  border:1px solid green;
+}
+
+.trash p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  z-index: 1;
+  font-family: Trebuchet MS;
+  font-weight: bold;
+  margin : 0px;
+}
+
+.trashCard {
+  position: absolute;
+  z-index: 1;
+}
+
+.trashDetails {
+  display: none;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  border:1px solid red;
+}
+
+.trashDetailsCard {
+  position: relative;
+  z-index: 1;
+}
+
+#trashDetailsToggle {
+  display: none;
+}
+
+#trashDetailsToggle:checked ~ .trashDetails {
+  display: inline;
+}
+
+#trashDetailsToggle:checked ~ .trash {
+  display: none;
+}
+
+/*****************************/
+/** Military/progress board **/
+/*****************************/
+
+#board {
+    grid-area: board;
+    justify-self: center;
+    align-self: start;
+    position: relative;	
+    border:2px solid red;
+}
+
+.militaryBoard {
+    position:relative;
+    border:2px solid purple;
+}
+
+.conflictPawn {
+  position:absolute;
+  top: 37.25%;
+  width: 4.2%;
+  left: calc( (50% - 0.9%) + 0*4.8%);
+  transition: 0.5s ease-in-out;
+}
+
+.wonderSelection {
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-row: auto auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+/*.conflictPawn {
+    position:absolute;
+    top: 37.25%;
+    width: 4.2%;
+    left: calc( (50% - 0.9%) + 0*4.8%);
+}
+
+.justAdvancedMilitary {
+  animation-name: justAdvancedMilitary;
+  animation-duration: 1.5s;
+  animation-delay: 1.5s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes justAdvancedMilitary {
+      0% { transform: translate(calc(-2*116%), 0px); }
+    100% { transform: translate(0px, 0px); }
+}*/
+
+/*****************************/
+/*****    Trash pile     *****/
+/*****************************/
+
+#trash {
+  grid-area: trash;
+  justify-self: end;
+  align-self: start;
+  width:150px;
+  height:150px;
+  border:2px solid gray;
+}
+
+/*****************************/
+/***    Players' cities    ***/
+/*****************************/
+
+#city1 {
+  grid-area: city1;
+  justify-self: start;
+  align-self: center;
+border: 3px solid black;
+}
+
+#city2 {
+  grid-area: city2;
+  justify-self: start;
+  align-self: center;
+	border: 3px solid black;
+}
+
+.wonders {
+  display: grid;
+  grid-template-columns: auto auto;
+		padding: 20px;
+		border:2px solid green;
+}
+
+.wonderContainer {
+  position:relative;
+  /*margin-top: 10px;
+margin-right: 10px;*/
+	border: 3px solid orange;
+}
+
+.wonderCard {
+  position:absolute;
+  height:100%;
+  top:50%;
+	 left:25%;
+  transform: translate(-50%, -50%) rotate(90deg);
+	border: 3px solid grey;
+}
+
+.wonderCard:hover {
+  transform: translate(-50%, -50%) rotate(90deg);
+  z-index: 1;
+}
+
+.wonder {
+  position:relative;
+  margin-left:40px;
+  z-index: 1;
+  
+  border: 3px solid black;
+  border-radius: 8px;
+  box-shadow: 2.5px 2.5px #bbb;
+  cursor: pointer;
+  transition: all .25s ease 0s;
+  backface-visibility: none; /* hidden */
+}
+
+.wonder:hover {
+  transform: scale(1.7);
+  z-index: 2;
+  transition: all .25s ease 0.5s;
+}
+
+.wonder:active {
+  transform: scale(2.5);
+  z-index: 2;
+  transition: all .25s ease 0.5s;
+}
+
+.cards {
+  display: grid;
+  grid-auto-flow: column;
+	 grid-template-columns: 84px 84px 84px 84px 84px 84px;
+  grid-column-gap: 5px;
+	 padding: 20px;
+		border: 3px solid purple;
+}
+
+.brown  { grid-column: 1/2; }
+.grey   { grid-column: 2/3; }
+.yellow { grid-column: 3/4; }
+.blue   { grid-column: 4/5; }
+.red    { grid-column: 5/6; }
+.green  { grid-column: 6/7; }
+.purple { grid-column: 7/8; }
+
+/*.deckCard {
+	; 
+}*/
+
+/*****************************/
+/*****   Age's pyramid   *****/
+/*****************************/
+
+#pyramid {
+  grid-area: pyramid;
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  /*width:480px;
+    height:450px;*/
+	 margin-left: 30px;
+	 margin-right: 30px;
+		border:2px solid yellow;
+}
+
+/*.pyramidStage {
+  ;
+}*/
+
+.pyramidCardContainer {
+  display:inline-block;
+}
+
+/*.card {
+  border: 3px solid black;
+  border-radius: 8px;
+  box-shadow: 2.5px 2.5px #bbb;
+  cursor: pointer;
+  transition: transform .25s ease 0s;
+  backface-visibility: none;
+}*/
+
+.pyramidCard {
+  position: absolute;
+}
+
+.card:hover {
+  transform: scale(1.7);
+  z-index: 1;
+  transition: transform .25s ease .3s;
+}
+
+.playable:hover {
+  border: 3px solid green;
+}
+
+.notplayable:hover {
+  border: 3px solid red;
+}
+
+/*****************************/
+/*****    Game info       ****/
+/*****************************/
+
+#infos {
+  grid-area: infos;
+  justify-self: center;
+  align-self: end;
+  width:500px;
+  height:70px;
+  border:2px solid purple;
+}

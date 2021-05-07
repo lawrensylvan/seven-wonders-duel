@@ -24,15 +24,20 @@ export const actions = {
         tableId
     }),
 
-    getGameState: (tableId) => ({
-        type: 'server/getGameState',
-        tableId
-    }),
-
+    getGameState: (tableId) => (tableId ?
+        {
+            type: 'server/getGameState',
+            tableId
+        } :
+        {
+            type: 'debug/serverlessGame'
+        }
+    ),
+        
     play: (tableId, move) => ({
         type: 'server/move',
         tableId,
         move
-    })
+    }),
 
 }

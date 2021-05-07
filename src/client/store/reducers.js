@@ -7,6 +7,12 @@ const session = (session = {isLoggedIn:false}, action) => {
                 name: action.name
             }
 
+        case 'debug/serverlessGame':
+            return {
+                isLoggedIn: true,
+                name: 'Laurent'
+            }
+
         default:
             return session;
     }
@@ -22,6 +28,15 @@ const tables = (tables = [], action) => {
 
         case 'tableUpdated':
             return tables.map(t => t.id===action.table.id ? action.table : t)
+
+        case 'debug/serverlessGame':
+            return [{
+                    id: 0,
+                    creator: 'Laurent',
+                    players: ['Laurent', 'Nadège'],
+                    playersReady: [true, true], // todo
+                    status: 'WAITING_FOR_MORE_PLAYERS' // todo
+            }]
 
         default:
             return tables
@@ -59,6 +74,32 @@ const games = (games = [], action) => {
                 state: step,
                 steps: [...g.steps, step]
             } : g)
+
+        case 'debug/serverlessGame':
+            return [{
+                tableId : 0,
+                state: {
+                    players: ['Laurent', 'Nadège'],
+                    toPlay: 'Laurent',
+                    militaryPosition: 2,
+                    progressTokens: ['agriculture', 'mathematics', null, 'masonry', null],
+                    city: ['law']
+                },
+                steps: []
+            }]
+
+        case 'debug/advanceMilitary':
+            return [{
+                tableId : 1,
+                state: {
+                    players: ['Laurent', 'Nadège'],
+                    toPlay: 'Laurent',
+                    militaryPosition: 3,
+                    progressTokens: [null, 'economy', 'strategy', 'architecture', 'theology'],
+                    //city: ['economy']
+                },
+                steps: []
+            }]
 
         default:
             return games

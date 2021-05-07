@@ -1,11 +1,13 @@
 import { moveHandlers, eventHandlers } from "./handlers"
 import { GameState } from "./state"
 
-export const Game = (players) => {
+export const Game = (players, tableId) => {
 
     const state = GameState(players)
 
     return {
+
+        id: tableId,
     
         getMoveProcessor : (player, move) => {
             const handler = moveHandlers[move.type]

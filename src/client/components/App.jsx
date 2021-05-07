@@ -5,11 +5,12 @@ import { useSelector } from 'react-redux'
 import { Lobby } from './Lobby'
 import { Table } from './Table'
 import { Login } from './Login'
+import { DebugAnimation } from './DebugAnimation'
 
 export const App = () => {
     
     const session = useSelector(state => state.session)
-    
+
     return (
     <Router>        
         <h1>Welcome to 7 Wonders Duel !</h1>
@@ -34,6 +35,14 @@ export const App = () => {
                 {session.isLoggedIn
                         ?   <Table/>
                         :   <Redirect to='/login'/>}
+            </Route>
+
+            <Route exact path="/debug/game">
+                <Table/>
+            </Route>
+
+            <Route exact path="/debug/animations">
+                <DebugAnimation/>
             </Route>
 
         </Switch>

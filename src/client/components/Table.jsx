@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { actions } from '../store/actions'
-import "./Table.css"
+import { Board} from './Board'
 
 export const Table = () => {
 
-    const id = parseInt(useParams().id)
+    const id = parseInt(useParams().id) || 0 // in debug mode, no id param so we fake it as 0
     const session = useSelector(state => state.session)
     const table = useSelector(state => state.tables[id])
-    const game = useSelector(state => state.games[id])
+    const game = useSelector(state => state.games.filter(g => g.tableId === id)[0])
 
     const dispatch = useDispatch()
     
@@ -18,7 +19,8 @@ export const Table = () => {
     }, [])
 
     useEffect(() => {
-        alert('Game step added !')
+        //alert('Game step added !')
+        // TODO: animation !
     }, [game && game.steps])
     
     const [move, setMove] = useState('{"type":"writeBoard","value":"X"}')
@@ -56,20 +58,19 @@ export const Table = () => {
         return null
     }
 
+    const ActionSender = () => {
+        return <form onSubmit={handleSubmit}>
+            <textarea cols={40} value={move} onChange={(e)=>setMove(e.target.value)}></textarea><br/>
+            <button>Send move request</button>
+        </form>
+    }
+
     return <>   
 
         <h2>Table #{id}</h2>
 
-        <Players/>
-
-        <GameSteps/>
-
-        <GameState/>
-
-        <form onSubmit={handleSubmit}>
-            <textarea cols={40} value={move} onChange={(e)=>setMove(e.target.value)}></textarea><br/>
-            <button>Send move request</button>
-        </form>
+        {game && game.state && <Board state={game.state} />}
+        <ActionSender/>
 
         <Link to='/lobby'>
             <button>{'<< '}Back to lobby</button>

@@ -15,5 +15,4 @@ export const addRandom = (state, event) => ({
         return []
     }
 
-
 })
