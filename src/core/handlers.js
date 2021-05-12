@@ -1,12 +1,9 @@
-import { buildCard } from "./moveHandlers/buildCard"
-import { writeBoard } from "./moveHandlers/writeBoard"
-import { addRandom } from './moveHandlers/addRandom'
+import { selectWonder } from './moveHandlers/selectWonder'
 
 export const moveHandlers = {
-    buildCard,
-    writeBoard
+    selectWonder
 }
 
 export const eventHandlers = {
-    addRandom   
+    
 }

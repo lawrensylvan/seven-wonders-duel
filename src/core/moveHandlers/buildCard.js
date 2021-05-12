@@ -2,7 +2,7 @@ export const buildCard = (state, player, action) => ({
     
     isValid() {
         return
-            state.toPlay.includes(action.player) &&
+            state.toPlay === action.player &&
             state.status === 'SHOULD_PLAY_TURN' &&
             state.getAccessibleCardsFromPyramid().includes(action.card)
     },

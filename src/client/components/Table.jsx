@@ -15,12 +15,13 @@ export const Table = () => {
     const dispatch = useDispatch()
     
     useEffect(() => {
+        console.log('We will get game state !')
         dispatch(actions.getGameState(id))
     }, [])
 
     useEffect(() => {
-        //alert('Game step added !')
-        // TODO: animation !
+        console.log('Game step added !')
+        dispatch(actions.getGameState(id))
     }, [game && game.steps])
     
     const [move, setMove] = useState('{"type":"writeBoard","value":"X"}')
@@ -70,8 +71,7 @@ export const Table = () => {
         <h2>Table #{id}</h2>
 
         {game && game.state && <Board state={game.state} />}
-        <ActionSender/>
-
+        
         <Link to='/lobby'>
             <button>{'<< '}Back to lobby</button>
         </Link>

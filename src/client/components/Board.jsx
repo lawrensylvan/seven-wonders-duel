@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Flipper } from 'react-flip-toolkit'
 import { actions } from '../store/actions'
+import { selectWonder } from '../../core/moves'
 import './Board.css'
 import { MilitaryBoard } from './MilitaryBoard'
 import { ProgressToken } from './ProgressToken'
@@ -11,6 +12,7 @@ import { Wonder } from './Wonder'
 export const Board = ({state}) => {
 
     console.dir(state)
+    const dispatch = useDispatch()
 
     const exitThenFlipThenEnter = ({
         hideEnteringElements,
@@ -24,15 +26,21 @@ export const Board = ({state}) => {
           .then(animateEnteringElements);
       };
 
-    return (
-        <Flipper flipKey={state} handleEnterUpdateDelete={exitThenFlipThenEnter} staggerConfig={{default:{reverse: true,speed: .5}}} debug={true} >
-            <div id="all">
+      const allTogether = ({
+        hideEnteringElements,
+        animateEnteringElements,
+        animateExitingElements,
+        animateFlippedElements
+      }) => {
+        hideEnteringElements();
+        animateExitingElements()
+        animateFlippedElements();
+        animateEnteringElements();
+      };
 
-                {state.wondersToSelect &&
-                    <div id="wonderSelection">
-                        {state.wondersToSelect.map((wonder, i) => <Wonder name={wonder} key={i} />)}
-                    </div>
-                }
+    return (
+        <Flipper flipKey={state} handleEnterUpdateDelete={allTogether} >
+            <div id="all">
 
                 {state.discard && 
                     <div id="discard">
@@ -46,21 +54,29 @@ export const Board = ({state}) => {
                     </MilitaryBoard>
                 }
 
+                {state.wondersToSelect && state.wondersToSelect.length > 0 &&
+                    <div id="wonderSelection">
+                        {state.wondersToSelect.map((wonder, i) => {
+                            return <Wonder name={wonder} key={i} onClick={()=>dispatch(actions.play(1, selectWonder(wonder)))} />
+                        })}
+                    </div>
+                }
+
                 {state.pyramid && 
                     <div id="pyramid">
 
                     </div>
                 }
 
-                {state.city &&
+                {state.cities && state.cities[0] &&
                     <div id="city1">
-                        {state.city.map(token => <ProgressToken name={token} key={token} />)}
+                        {state.cities[0].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                     </div>
                 }
 
-                {state.city2 && 
+                {state.cities && state.cities[1] &&
                     <div id="city2">
-
+                        {state.cities[1].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                     </div>
                 }
 

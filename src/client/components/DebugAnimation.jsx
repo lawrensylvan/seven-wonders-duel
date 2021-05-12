@@ -49,7 +49,6 @@ export const DebugAnimation = () => {
         anime({
           targets: el,
           opacity: 1,
-          loop: true,
           left: '240px',
           delay: i * 10,
           easing: "easeOutSine"
@@ -82,7 +81,7 @@ export const DebugAnimation = () => {
             <div id="containerTop">
                 {state[0].map(url =>
                     <Flipped flipId={url} key={url} onExit={animateElementOut} onAppear={animateElementIn}>
-                        <img src={url} width={100} />
+                        <img src={url} width={100} style={{transform: "rotate(30deg)"}} />
                     </Flipped>)}
             </div>
 

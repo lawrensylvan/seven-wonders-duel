@@ -8,7 +8,23 @@ export const GameState = (players) => {
 
         militaryPosition: 0,
         progressTokens: ['law', 'economy', 'architecture', 'strategy', null],
-        wondersToSelect: ['greatLibrary', null, 'mausoleum', 'pyramids'],
+        
+        discardPile: [],
+
+        wondersToSelect: ['greatLibrary', 'sphinx', 'mausoleum', 'pyramids'],
+        cities: [{
+            builtWonders:       [],
+            wonders:            [],
+            buildings:          [],
+            progressTokens:     [],
+            coins:              7
+        }, {
+            builtWonders:       [],
+            wonders:            [],
+            buildings:          [],
+            progressTokens:     [],
+            coins:              7
+        }],
 
         getPublicState(player) {
             return this

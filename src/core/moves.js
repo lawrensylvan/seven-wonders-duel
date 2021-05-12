@@ -1,6 +1,5 @@
 // at the beginning of the game
-
-const selectWonder = (wonder) => ({
+export const selectWonder = (wonder) => ({
     type: 'selectWonder',
     wonder
 })
@@ -21,7 +20,7 @@ const buildWonder = (wonder, card) => ({
     card
 })
 
-// effect of specific wonder
+// effect of specific wonder or 2 same green symbols
 const selectToken = (card, token) => ({
     type: 'selectToken',
     token

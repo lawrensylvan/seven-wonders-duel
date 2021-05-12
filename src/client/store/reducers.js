@@ -71,7 +71,7 @@ const games = (games = [], action) => {
         case 'gameStepPushed':
             return games.map(g => g.tableId===tableId ? {
                 ...g,
-                state: step,
+                state: stepHandler.applyStepOnState(step, state),
                 steps: [...g.steps, step]
             } : g)
 
@@ -91,12 +91,16 @@ const games = (games = [], action) => {
         case 'debug/advanceMilitary':
             return [{
                 tableId : 1,
+                
                 state: {
                     players: ['Laurent', 'Nadège'],
-                    toPlay: 'Laurent',
+                    toPlay: 'Nadège',
                     militaryPosition: 3,
                     progressTokens: [null, 'economy', 'strategy', 'architecture', 'theology'],
-                    //city: ['economy']
+                    wondersToSelect: ['greatLibrary', null, null, 'pyramids'],
+                    cities: [{
+                        wonders: ['zeus', 'mausoleum']
+                    }]
                 },
                 steps: []
             }]

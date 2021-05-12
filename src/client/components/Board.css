@@ -1,26 +1,25 @@
+/******************************/
+/****** General properties ****/
+/******************************/
 
 * {
-  box-sizing:border-box;	/* padding+border inclus dans width/height */
-	 user-select: none;
+  box-sizing:border-box;	/* padding+border included in width/height */
+	user-select: none;
 }
 
 body {
 	background-color : #EEEEE0;
 }
 
-.hidden {
-  visibility: hidden;
-}
-
 #all {
 	
-		/* Choix 1 : taille "fixe" mais qui zoom in/out en fct de l'écran */
+	/* Choix 1 : taille "fixe" mais qui zoom in/out en fct de l'écran */
   position: fixed;
-	 left: 50%;
+	left: 50%;
   top: 50%;
-		transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	
-	 /* Choix 2 : design qui s'adapte pour créer de l'espace
+	/* Choix 2 : design qui s'adapte pour créer de l'espace
 	si bcp de place, mais ne se réduit pas en fct de l'écran 
 	 position:fixed;
      width:100%;
@@ -34,10 +33,44 @@ body {
     "board board board"
     "city1 pyramid city2"
     "infos infos infos";
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   justify-items: center;
   align-items: center;
-	
-border:2px solid black;
+	border:2px solid black;
+}
+
+/****************************/
+/*** General game items *****/
+/****************************/
+
+.card {
+  border: 3px solid black;
+  border-radius: 8px;
+  box-shadow: 2.5px 2.5px #bbb;
+  /*transition: transform .25s ease 0s;*/
+  backface-visibility: hidden;
+  z-index: 1;
+}
+
+.wonder {
+  width: 150px;
+}
+
+/*.card:hover {
+  transform: scale(1.7);
+  z-index: 2;
+  transition: transform .25s ease .3s;
+}*/
+
+.playable:hover {
+  border: 3px solid green;
+  cursor: pointer;
+}
+
+.notplayable:hover {
+  border: 3px solid red;
+  cursor: pointer;
 }
 
 /*****************************/
@@ -50,8 +83,8 @@ border:2px solid black;
   align-self: start;
   width:450px;
   height:150px;
-	 position: absolute;
-		border:2px solid yellow;
+	position: absolute;
+  border:2px solid yellow;
 }
 
 .trash {
@@ -116,8 +149,8 @@ border:2px solid black;
 }
 
 .militaryBoard {
-    position:relative;
-    border:2px solid purple;
+  position:relative;
+  border:2px solid purple;
 }
 
 .conflictPawn {
@@ -125,15 +158,23 @@ border:2px solid black;
   top: 37.25%;
   width: 4.2%;
   left: calc( (50% - 0.9%) + 0*4.8%);
-  transition: 0.5s ease-in-out;
+  /*transition: 0.5s ease-in-out;*/
 }
 
-.wonderSelection {
+/*****************************/
+/****** Wonder selection *****/
+/*****************************/
+
+#wonderSelection {
+  grid-area: pyramid;
   display: grid;
-  grid-template-columns: 200px 200px;
-  grid-row: auto auto;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
+}
+
+#wonderSelection .wonder {
+  width: 200px;
 }
 
 /*.conflictPawn {
@@ -179,7 +220,7 @@ border:2px solid black;
   grid-area: city1;
   justify-self: start;
   align-self: center;
-border: 3px solid black;
+  border: 3px solid black;
 }
 
 #city2 {
@@ -203,6 +244,11 @@ margin-right: 10px;*/
 	border: 3px solid orange;
 }
 
+.wonderContainer .wonder {
+  position:relative;
+  margin-left:40px;
+}
+
 .wonderCard {
   position:absolute;
   height:100%;
@@ -217,38 +263,13 @@ margin-right: 10px;*/
   z-index: 1;
 }
 
-.wonder {
-  position:relative;
-  margin-left:40px;
-  z-index: 1;
-  
-  border: 3px solid black;
-  border-radius: 8px;
-  box-shadow: 2.5px 2.5px #bbb;
-  cursor: pointer;
-  transition: all .25s ease 0s;
-  backface-visibility: none; /* hidden */
-}
-
-.wonder:hover {
-  transform: scale(1.7);
-  z-index: 2;
-  transition: all .25s ease 0.5s;
-}
-
-.wonder:active {
-  transform: scale(2.5);
-  z-index: 2;
-  transition: all .25s ease 0.5s;
-}
-
 .cards {
   display: grid;
   grid-auto-flow: column;
-	 grid-template-columns: 84px 84px 84px 84px 84px 84px;
+	grid-template-columns: 84px 84px 84px 84px 84px 84px;
   grid-column-gap: 5px;
-	 padding: 20px;
-		border: 3px solid purple;
+	padding: 20px;
+	border: 3px solid purple;
 }
 
 .brown  { grid-column: 1/2; }
@@ -287,31 +308,9 @@ margin-right: 10px;*/
   display:inline-block;
 }
 
-/*.card {
-  border: 3px solid black;
-  border-radius: 8px;
-  box-shadow: 2.5px 2.5px #bbb;
-  cursor: pointer;
-  transition: transform .25s ease 0s;
-  backface-visibility: none;
-}*/
 
 .pyramidCard {
   position: absolute;
-}
-
-.card:hover {
-  transform: scale(1.7);
-  z-index: 1;
-  transition: transform .25s ease .3s;
-}
-
-.playable:hover {
-  border: 3px solid green;
-}
-
-.notplayable:hover {
-  border: 3px solid red;
 }
 
 /*****************************/
