@@ -1,3 +1,4 @@
+import {stepHandler} from '../../core/stepHandler'
 
 const session = (session = {isLoggedIn:false}, action) => {
     switch (action.type) {
@@ -71,7 +72,7 @@ const games = (games = [], action) => {
         case 'gameStepPushed':
             return games.map(g => g.tableId===tableId ? {
                 ...g,
-                state: stepHandler.applyStepOnState(step, state),
+                state: stepHandler(step, g.state),
                 steps: [...g.steps, step]
             } : g)
 

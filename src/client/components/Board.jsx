@@ -39,7 +39,7 @@ export const Board = ({state}) => {
       };
 
     return (
-        <Flipper flipKey={state} handleEnterUpdateDelete={allTogether} >
+        <Flipper flipKey={state} handleEnterUpdateDelete={exitThenFlipThenEnter} >
             <div id="all">
 
                 {state.discard && 

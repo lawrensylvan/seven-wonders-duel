@@ -4,6 +4,7 @@ import { GameState } from "./state"
 export const Game = (players, tableId) => {
 
     const state = GameState(players)
+    const lastPlayerSideStates = {}
 
     return {
 
