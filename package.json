@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack",
     "client": "webpack-dev-server --open",
-    "server": "nodemon --ignore client/ --exec babel-node src/server/server",
-    "debug-server": "babel-node --nolazy --inspect-brk=9229 src/server/server"
+    "server": "nodemon --ignore client/ --exec babel-node src/trndgine/server/server",
+    "debug-server": "babel-node --nolazy --inspect-brk=9229 src/trndgine/server/server"
   },
   "repository": {
     "type": "git",

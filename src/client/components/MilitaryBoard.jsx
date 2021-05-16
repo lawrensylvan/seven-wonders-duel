@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 
 export const MilitaryBoard = ({militaryPosition, children}) => {
 
-    const board_url = require(`../../assets/militaryBoard/board-h.png`).default
-    const pawn_url = require(`../../assets/militaryBoard/conflictPawn-v.png`).default
+    const board_url = require(`../assets/militaryBoard/board-h.png`).default
+    const pawn_url = require(`../assets/militaryBoard/conflictPawn-v.png`).default
 
     const dispatch = useDispatch()
     

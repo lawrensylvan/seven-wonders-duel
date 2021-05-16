@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { animateElementIn, animateElementOut } from '../animations'
+import { animateElementIn, animateElementOut } from '../../trndgine/client/animations'
 
 export const Wonder = ({name, css, onClick}) => {
 
     const [rotation] = useState(Math.round((Math.random() - 0.5) * 10))
 
-    const url = require(`../../assets/wonders/${name || 'zeus'}.jpg`).default
+    const url = require(`../assets/wonders/${name || 'zeus'}.jpg`).default
 
     const style = {
         ...css,

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { animateElementIn, animateElementOut } from '../animations'
+import { animateElementIn, animateElementOut } from '../../trndgine/client/animations'
 
 export const ProgressToken = ({name, css}) => {
     if(!name) return null
 
     const [rotation] = useState(Math.round((Math.random() - 0.5) * 40))
 
-    const url = require(`../../assets/progressTokens/${name}.png`).default
+    const url = require(`../assets/progressTokens/${name}.png`).default
 
     const style = {
         ...css,

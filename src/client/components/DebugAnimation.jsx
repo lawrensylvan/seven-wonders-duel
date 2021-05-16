@@ -6,12 +6,12 @@ let count = 0;
 
 export const DebugAnimation = () => {
 
-    const url1 = require(`../../assets/progressTokens/agriculture.png`).default
-    const url2 = require(`../../assets/progressTokens/law.png`).default
-    const url3 = require(`../../assets/progressTokens/strategy.png`).default
-    const url4 = require(`../../assets/progressTokens/philosophy.png`).default
-    const url5 = require(`../../assets/progressTokens/mathematics.png`).default
-    const url6 = require(`../../assets/progressTokens/theology.png`).default
+    const url1 = require(`../assets/progressTokens/agriculture.png`).default
+    const url2 = require(`../assets/progressTokens/law.png`).default
+    const url3 = require(`../assets/progressTokens/strategy.png`).default
+    const url4 = require(`../assets/progressTokens/philosophy.png`).default
+    const url5 = require(`../assets/progressTokens/mathematics.png`).default
+    const url6 = require(`../assets/progressTokens/theology.png`).default
 
     const [state, setState] = useState([[url1, url2, url3], [url4, url5]])
 
