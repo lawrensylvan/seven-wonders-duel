@@ -97,32 +97,34 @@ export const ServerState = () => {
             return game.getGameState4(player)
         },
 
-        getMoveProcessor(tableId, player, move) {
+        getGameStatePatch4(player, tableId) {
+            this.checkPlayerExists(player)
+            const table = this.getTable(tableId)
+            if(!table.players.includes(player)) throw 'This player is not in this game'
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            const game = this.getGame(tableId)
+            return game.getGameStatePatch4(player)
+        },
+
+        processMove(tableId, player, move) {
             this.checkPlayerExists(player)
             const table = this.getTable(tableId)
             if(!table.players.includes(player)) throw 'This player is not in this game'
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            const processor = game.getMoveProcessor(player, move)
-            return processor
+            const nextEvents = game.processMove(player, move)
+            return nextEvents
         },
 
-        getEventProcessor(tableId, event) {
+        processGameEvent(tableId, event) {
             const table = this.getTable(tableId)
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            const processor = game.getEventProcessor(event)
-            return processor
+            const nextEvents = game.processEvent(event)
+            return nextEvents
         }
-
-        /*getGameState(tableId) {
-            const table = getTable(tableId)
-            if(!table.hasStarted()) throw 'The game has not started yet'
-            const game = games[tableId]
-            return game.getGameState()
-        },*/
 
     }
 }

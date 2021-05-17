@@ -27,7 +27,7 @@ export const GameState = (players) => {
         }],
 
         getPublicState(player) {
-            return this
+            return JSON.parse(JSON.stringify(this)) // todo : use immerjs
         }
 
     }

@@ -1,4 +1,4 @@
-import {stepHandler} from '../../../core/stepHandler'
+import { applyPatch } from 'fast-json-patch'
 
 const session = (session = {isLoggedIn:false}, action) => {
     switch (action.type) {
@@ -45,7 +45,7 @@ const tables = (tables = [], action) => {
 }
 
 const games = (games = [], action) => {
-    const {tableId, state, step} = action
+    const {tableId, state, patch} = action
     switch (action.type) {
         case 'gameStarted':
             return [...games, {
@@ -69,11 +69,11 @@ const games = (games = [], action) => {
                 }]
             }
 
-        case 'gameStepPushed':
+        case 'gameStatePatched':
             return games.map(g => g.tableId===tableId ? {
                 ...g,
-                state: stepHandler(step, g.state),
-                steps: [...g.steps, step]
+                state: applyPatch(g.state, patch, true, false).newDocument,
+                steps: [...g.steps, patch]
             } : g)
 
         case 'debug/serverlessGame':
