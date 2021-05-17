@@ -5,7 +5,7 @@ import createSocketIOMiddleware from 'redux-socket.io'
 
 import reducers from './reducers'
 
-const io = socketIO('http://localhost:7777')
+const io = socketIO('http://' + serverHost + ':' + serverPort)
 
 io.on('server error', (error) => alert(`Got error from server : ${error}`))
 

@@ -61,7 +61,6 @@ export const ServerState = () => {
         },
 
         joinTable(player, id) {
-            console.log('id' + id)
             this.checkPlayerExists(player)
             const table = this.getTable(id)
             table.addPlayer(player)

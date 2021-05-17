@@ -39,16 +39,11 @@ export const Game = (players, tableId) => {
 
         getGameStatePatch4 : (player) => {
             const oldState = cachedPublicStates[player] || []
-            console.log('Here is old state for player ' + player)
-            console.dir(oldState)
             if(!publicStates[player]) {
                 publicStates[player] = state.getPublicState(player)
             }
             const newState = publicStates[player]
-            console.log('Here is new state for player ' + player)
-            console.dir(newState)
             const patch = compare(oldState, newState)
-            console.dir(patch)
             cachedPublicStates[player] = publicStates[player]
             return patch
         },

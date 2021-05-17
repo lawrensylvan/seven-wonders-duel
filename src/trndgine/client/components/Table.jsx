@@ -16,15 +16,9 @@ export const Table = () => {
     
     // Get the initial/current game state from the server
     useEffect(() => {
-        console.log('We will get game state !')
         dispatch(actions.getGameState(id))
     }, [])
 
-    /*useEffect(() => {
-        console.log('Game step added !')
-        dispatch(actions.getGameState(id))
-    }, [game && game.steps])*/ // we don't want to lead game state after playing anymore, we will wait for the game step to arrive
-    
     const [move, setMove] = useState('{"type":"writeBoard","value":"X"}')
     
     const handleSubmit = (e) => {

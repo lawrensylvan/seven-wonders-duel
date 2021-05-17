@@ -93,8 +93,6 @@ export const ActionHandler = (io) => {
         },
 
         resign: ({tableId}, socket) => {
-            console.log('Client requested to resign')
-            const player = state.getPlayerBySocket(socket.id)
             // todo
         }
 

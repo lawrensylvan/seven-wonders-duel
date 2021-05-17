@@ -1,4 +1,17 @@
 const path = require("path")
+const webpack = require("webpack")
+
+function findParam(param){
+    let result = null
+    process.argv.forEach(argv => {
+        if(argv.indexOf('--' + param) === -1) return
+        result = argv.split('=')[1];
+    })
+    return result
+}
+
+const serverHost = findParam('serverHost') || 'localhost'
+const serverPort = findParam('serverPort') || 7777
 
 module.exports = {
     mode: "development",
@@ -26,5 +39,11 @@ module.exports = {
             use: ['file-loader']
         }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({ 
+            serverHost: JSON.stringify(serverHost),
+            serverPort: JSON.stringify(serverPort)
+        })
+    ]
 }
