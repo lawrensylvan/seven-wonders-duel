@@ -22,7 +22,7 @@ export const Game = (players, tableId) => {
         },
 
         processEvent(event) {
-            const handler = eventsHandlers[move.type]
+            const handler = eventHandlers[event.type]
             if(!handler) throw 'Internal error : this event type does not exist'
             const nextEvents = handler(state, event)
             publicStates = players.map(p => state.getPublicState(p))

@@ -4,10 +4,12 @@ export const selectWonder = (wonder) => ({
     wonder
 })
 
-const buildCard = (card) => ({
-    type: 'buildCard',
-    card,
+export const buyBuilding = (building) => ({
+    type: 'buyBuilding',
+    building
 })
+
+/* The following is draft */
 
 const sellCard = (card) => ({
     type: 'sellCard',

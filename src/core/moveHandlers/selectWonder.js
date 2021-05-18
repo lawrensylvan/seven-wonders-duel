@@ -1,3 +1,5 @@
+import {startAge} from '../events'
+
 export const selectWonder = (state, player, {wonder}) => {
     // check if move is valid
     if(state.toPlay !== player) throw 'It is not your turn'
@@ -14,5 +16,6 @@ export const selectWonder = (state, player, {wonder}) => {
         state.toPlay = state.players[id === 0 ? 1 : 0]
     }
 
-    return []
+    // start age 1 phase if all wonders have been claimed
+    return wondersLeft ? [] : [startAge(1)]
 }

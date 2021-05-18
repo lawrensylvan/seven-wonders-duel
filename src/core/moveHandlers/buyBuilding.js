@@ -1,4 +1,22 @@
-export const buildCard = (state, player, action) => ({
+import {applyCardBenefits} from '../events'
+
+export const buyBuilding = (state, player, {building}) => {
+    // TODO : check if move is valid
+    
+    // move building from pyramid to player
+    const id = state.players.indexOf(player)
+    state.cities[id].buildings.push(building)
+    state.pyramid[4][state.pyramid[4].indexOf(building)] = null // TODO
+    
+    // TODO : take money and check resources
+
+    // start next age phase if all buildings have been claimed
+    // TODO : apply building benefits
+    return state.pyramid.some(stage => stage.some(b => b !== null)) ? [] : [startAge(state.age + 1)]
+}
+
+/* This is an unused draft */
+const buildCard = (state, player, action) => ({
     
     isValid() {
         return

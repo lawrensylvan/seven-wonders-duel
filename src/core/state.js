@@ -12,6 +12,9 @@ export const GameState = (players) => {
         discardPile: [],
 
         wondersToSelect: ['greatLibrary', 'sphinx', 'mausoleum', 'pyramids'],
+
+        pyramid: [],
+
         cities: [{
             builtWonders:       [],
             wonders:            [],
@@ -27,7 +30,10 @@ export const GameState = (players) => {
         }],
 
         getPublicState(player) {
-            return JSON.parse(JSON.stringify(this)) // todo : use immerjs
+            let publicState = JSON.parse(JSON.stringify(this))
+            // hide the buildings that should be face down in the pyramid
+            publicState.pyramid = publicState.pyramid.map((stage, i) => i % 2 ? stage.map(building => 'unknown') : stage)
+            return publicState
         }
 
     }

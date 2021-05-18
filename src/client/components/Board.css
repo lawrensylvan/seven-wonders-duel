@@ -12,10 +12,12 @@ body {
 }
 
 /* Borders on all elements for debugging purposes */
+/*
 *:not(path) {
 	outline:    solid 0.1rem hsla(210, 100%, 100%, 0.5) !important;
 	box-shadow: none !important;
 }
+*/
 
 #all {
 	
@@ -56,14 +58,11 @@ body {
   /*transition: transform .25s ease 0s;*/
   backface-visibility: hidden;
   z-index: 1;
-}
-
-.wonder {
-  width: 150px;
+  margin: 4px;
 }
 
 .card:hover {
-  transform: scale(1.7);
+  transform: scale(1.9);
   z-index: 2;
   transition: transform .25s ease .3s;
 }
@@ -76,6 +75,14 @@ body {
 .notplayable:hover {
   border: 3px solid red;
   cursor: pointer;
+}
+
+.wonder {
+  width: 150px;
+}
+
+.building {
+  width: 80px;
 }
 
 /*****************************/
@@ -230,7 +237,6 @@ body {
 .wonders {
   display: grid;
   grid-template-columns: auto auto;
-		padding: 20px;
 }
 
 .wonderContainer {
@@ -255,7 +261,7 @@ body {
   z-index: 1;
 }
 
-.cards {
+.buildingContainer {
   display: grid;
   grid-auto-flow: column;
 	grid-template-columns: 84px 84px 84px 84px 84px 84px;
@@ -284,24 +290,32 @@ body {
   justify-self: center;
   align-self: center;
   position: relative;
-  /*width:480px;
-    height:450px;*/
-	 margin-left: 30px;
-	 margin-right: 30px;
 }
 
-/*.pyramidStage {
-  ;
+.pyramidStage {
+  margin-bottom: -50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+}
+
+/*.pyramidCardContainer {
+  padding: 4px;
 }*/
 
-.pyramidCardContainer {
+/*.pyramidStage.odd {
+  margin-left: 40px;
+}*/
+
+/*.pyramidCardContainer {
   display:inline-block;
-}
+}*/
 
-
-.pyramidCard {
+/*.pyramidCard {
   position: absolute;
-}
+}*/
 
 /*****************************/
 /*****    Game info       ****/

@@ -3,10 +3,11 @@ import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Flipper } from 'react-flip-toolkit'
 import { actions } from '../../trndgine/client/store/actions'
-import { selectWonder } from '../../core/moves'
+import { selectWonder, buyBuilding } from '../../core/moves'
 import './Board.css'
 import { MilitaryBoard } from './MilitaryBoard'
 import { ProgressToken } from './ProgressToken'
+import { Building } from './Building'
 import { Wonder } from './Wonder'
 
 export const Board = ({state}) => {
@@ -57,20 +58,32 @@ export const Board = ({state}) => {
                 {state.wondersToSelect && state.wondersToSelect.length > 0 &&
                     <div id="wonderSelection">
                         {state.wondersToSelect.map((wonder, i) => {
-                            return <Wonder name={wonder} key={i} onClick={()=>dispatch(actions.play(1, selectWonder(wonder)))} />
+                            return <Wonder name={wonder} key={i} onClick={()=>dispatch(actions.play(1, selectWonder(wonder)))} /> // TODO : table id
                         })}
                     </div>
                 }
 
                 {state.pyramid && 
                     <div id="pyramid">
-
+                        {state.pyramid.map((stage, stageIdx) => {
+                            return <div className='pyramidStage' key={stageIdx}>
+                                {stage.map((building, buildingIdx) => {
+                                    return <Building name={building} onClick={()=>dispatch(actions.play(1, buyBuilding(building)))}
+                                                     age={state.age} key={buildingIdx} globalKey={stageIdx*10+buildingIdx} />
+                                })}
+                            </div>})
+                        }
                     </div>
                 }
 
                 {state.cities && state.cities[0] &&
                     <div id="city1">
-                        {state.cities[0].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
+                        <div class="wonderContainer">
+                            {state.cities[0].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
+                        </div>
+                        <div class="buildingContainer">
+                            {state.cities[0].buildings.map((building, i) => <Building name={building} key={i} />)}
+                        </div>
                     </div>
                 }
 
