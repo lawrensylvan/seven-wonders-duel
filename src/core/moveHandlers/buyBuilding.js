@@ -1,6 +1,6 @@
 import { applyCardBenefits } from '../events'
 import { _ } from 'lodash'
-import { startAge } from '../eventHandlers/startAge'
+import {startAge} from '../events'
 
 export const buyBuilding = (state, player, {building}) => {
     // check that the building is indeed in the pyramid
@@ -15,7 +15,7 @@ export const buyBuilding = (state, player, {building}) => {
         // check if there are cards on the next stage that would block from taking this card
         const bottomCardIndexes = [buildingIndex, buildingIndex + offset]
         const bottomCards = bottomCardIndexes.map(i => bottomStage[i]).filter(card => card)
-        if(bottomCards.length) throw `The building ${building} is blocked by ${bottomCards.map(card => !card.faceDown && card.building)}`
+        if(bottomCards.length) throw `The building ${building} is not accessible from the pyramid`
     }
 
     // TODO : check resource requirements
@@ -43,7 +43,7 @@ export const buyBuilding = (state, player, {building}) => {
         }).forEach(topCard => delete topCard.faceDown)
     }
 
-    // TODO : apply benefits
+    // TODO : apply card special benefits
 
     // TODO : start next age phase if all buildings have been claimed
     return state.pyramid.some(stage => stage.some(card => card)) ? [] : [startAge(state.age + 1)]
