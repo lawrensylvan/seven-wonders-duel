@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { animateElementIn, animateElementOut } from '../../trndgine/client/animations'
+import { fadeIn, fadeOut } from '../../trndgine/client/animations'
 
 export const Wonder = ({name, css, onClick}) => {
 
@@ -14,7 +14,7 @@ export const Wonder = ({name, css, onClick}) => {
         visibility: name ? 'visible' : 'hidden'
     }
     
-    return <Flipped flipId={name} onExit={animateElementOut} onAppear={animateElementIn}>
+    return <Flipped flipId={name} onExit={fadeOut} onAppear={fadeIn}>
         <img className="card wonder playable" src={url} draggable="false" style={style} onClick={onClick} />
     </Flipped>
 }

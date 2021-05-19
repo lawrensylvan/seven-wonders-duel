@@ -78,10 +78,10 @@ export const Board = ({state}) => {
 
                 {state.cities && state.cities[0] &&
                     <div id="city1">
-                        <div class="wonderContainer">
+                        <div className="wonderContainer">
                             {state.cities[0].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                         </div>
-                        <div class="buildingContainer">
+                        <div className="buildingContainer">
                             {state.cities[0].buildings.map((building, i) => <Building name={building} key={i} />)}
                         </div>
                     </div>

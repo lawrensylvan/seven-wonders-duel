@@ -1,3 +1,4 @@
+import { Building } from "../client/components/Building"
 
 export const GameState = (players) => {
 
@@ -31,8 +32,10 @@ export const GameState = (players) => {
 
         getPublicState(player) {
             let publicState = JSON.parse(JSON.stringify(this))
-            // hide the buildings that should be face down in the pyramid
-            publicState.pyramid = publicState.pyramid.map((stage, i) => i % 2 ? stage.map(building => 'unknown') : stage)
+            
+            // replace the name of the buildings that should be face down in the pyramid by "faceDown"
+            publicState.pyramid = publicState.pyramid.map(stage => stage.map(card => card?.faceDown ? 'faceDown' : card?.building))
+
             return publicState
         }
 

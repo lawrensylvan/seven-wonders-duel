@@ -38,7 +38,7 @@ export const Game = (players, tableId) => {
         },
 
         getGameStatePatch4 : (player) => {
-            const oldState = cachedPublicStates[player] || []
+            const oldState = cachedPublicStates[player] || [] // todo : player is the name, should use id !
             if(!publicStates[player]) {
                 publicStates[player] = state.getPublicState(player)
             }

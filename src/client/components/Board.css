@@ -64,7 +64,7 @@ body {
 .card:hover {
   transform: scale(1.9);
   z-index: 2;
-  transition: transform .25s ease .3s;
+  transition: transform .25s ease .6s;
 }
 
 .playable:hover {
@@ -266,7 +266,10 @@ body {
   grid-auto-flow: column;
 	grid-template-columns: 84px 84px 84px 84px 84px 84px;
   grid-column-gap: 5px;
-	padding: 20px;
+}
+
+.buildingContainer .building {
+  margin-bottom: -100px;
 }
 
 .brown  { grid-column: 1/2; }
@@ -293,7 +296,7 @@ body {
 }
 
 .pyramidStage {
-  margin-bottom: -50px;
+  margin-bottom: -65px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

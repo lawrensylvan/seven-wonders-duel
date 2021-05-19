@@ -22,14 +22,14 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.json']
     },
     devServer:{
         historyApiFallback: true
     },
     module: {
         rules:[{
-            test: /\.jsx?/,
+            test: /\.jsx?$/,
             loader: 'babel-loader'
         }, {
             test: /\.css$/, 
@@ -37,8 +37,7 @@ module.exports = {
         }, {
             test: /\.(png|svg|jpg|gif)$/,
             use: ['file-loader']
-        }
-        ]
+        }]
     },
     plugins: [
         new webpack.DefinePlugin({ 
