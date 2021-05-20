@@ -27,7 +27,9 @@ export const buyBuilding = (state, player, {building}) => {
     const id = state.players.indexOf(player)
     state.cities[id].buildings.push(building)
 
-    // TODO : apply card special benefits
+    // TODO : add building permanent effects to player special powers
+    
+    // TODO : apply building immediate effects
 
     // flip the cards up in the upper stage
     const topStage = state.pyramid[state.pyramid.indexOf(targetStage) - 1]

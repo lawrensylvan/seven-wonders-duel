@@ -168,7 +168,9 @@
     "age": 1,
     "color": "yellow",
     "price": 3,
-    "immediateEffects": ["changeRate(stone, 1) TODO : permanent effect"]
+    "permanentEffects": [
+      {"type": "tradeResource", "resource": "stone", "price": 1}
+    ]
   }
   ,
   {
@@ -176,7 +178,9 @@
     "age": 1,
     "color": "yellow",
     "price": 3,
-    "immediateEffects": ["changeRate(clay, 1) TODO : permanent effect"]
+    "permanentEffects": [
+      {"type": "tradeResource", "resource": "clay", "price": 1}
+    ]
   }
   ,
   {
@@ -184,7 +188,9 @@
     "age": 1,
     "color": "yellow",
     "price": 3,
-    "immediateEffects": ["changeRate(wood, 1) TODO : permanent effect"]
+    "permanentEffects": [
+      {"type": "tradeResource", "resource": "wood", "price": 1}
+    ]
   }
   ,
   {
@@ -248,6 +254,7 @@
     "name": "horsebreeders",
     "age": 2,
     "color": "red",
+    "requirements": ["clay", "wood"], 
     "chainCondition": "horseshoe",
     "immediateEffects": [
       {"type": "goMilitary", "amount": 1}
@@ -258,6 +265,7 @@
     "name": "barracks",
     "age": 2,
     "color": "red",
+    "price": 3,
     "chainCondition": "sword",
     "immediateEffects": [
       {"type": "goMilitary", "amount": 1}
@@ -268,6 +276,7 @@
     "name": "archeryrange",
     "age": 2,
     "color": "red",
+    "requirements": ["stone", "wood", "paper"],
     "chainAccess": "target",
     "immediateEffects": [
       {"type": "goMilitary", "amount": 2}
@@ -278,6 +287,7 @@
     "name": "paradeground",
     "age": 2,
     "color": "red",
+    "requirements": ["clay", "clay", "glass"],
     "chainAccess": "helmet",
     "immediateEffects": [
       {"type": "goMilitary", "amount": 2}
@@ -393,7 +403,10 @@
     "age": 2,
     "color": "yellow",
     "price": 4,
-    "immediateEffects": "{changeRate(paper, 1),changeRate(glass,1)} TODO : permanent action"
+    "permanentEffects": [
+      {"type": "tradeResource", "resource": "paper", "price": 1},
+      {"type": "tradeResource", "resource": "glass", "price": 1}
+    ]
   }
   ,
   {

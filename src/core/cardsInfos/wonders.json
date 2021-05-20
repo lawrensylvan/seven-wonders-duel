@@ -7,12 +7,14 @@
       "immediateEffects": [
         {"type": "playAgain"}
       ]
-    },
+    }
+    ,
     {
       "displayName": "pyramids",
       "resourceCondition": ["paper","stone","stone","stone"],
       "victoryValue": 9
-    },
+    }
+    ,
     {
       "displayName": "sphinx",
       "resourceCondition": ["glass","glass","clay","stone"],
@@ -41,7 +43,8 @@
         {"type": "destroyMoney", "amount": 3},
         {"type": "playAgain"}
       ]
-    },
+    }
+    ,
     {
       "displayName": "templeofartemis",
       "resourceCondition": ["paper","glass","stone","wood"],
@@ -49,7 +52,8 @@
         {"type": "gainMoney", "amount": 12},
         {"type": "playAgain"}
       ]
-    },
+    }
+    ,
     {
       "displayName": "circusmaximus",
       "resourceCondition": ["glass","wood","stone","stone"],
@@ -58,7 +62,8 @@
         {"type": "offerBuildingDestruction", "color": "gray"},
         {"type": "goMilitary", "amount": 1}
       ]
-    },
+    }
+    ,
     {
       "displayName": "colossus",
       "resourceCondition": ["glass","clay","clay","clay"],
@@ -66,13 +71,15 @@
       "immediateEffects": [
         {"type": "goMilitary", "amount": 2}
       ]
-    },
+    }
+    ,
     {
       "displayName": "greatlighthouse",
       "resourceCondition": ["paper","paper","stone","wood"],
       "victoryValue": 4,
       "production": [["wood", "stone", "clay"]]
-    },
+    }
+    ,
     {
       "displayName": "greatlibrary",
       "resourceCondition": ["paper","glass","wood","wood","wood"],
@@ -80,7 +87,8 @@
       "immediateEffects": [
         {"type": "offerProgressTokenFromTrash", "amount": 1, "amongst": 3}
       ]
-    },
+    }
+    ,
     {
       "displayName": "hanginggardens",
       "resourceCondition": ["paper","glass","wood","wood"],
@@ -90,7 +98,8 @@
         {"type": "playAgain"}
       ]
       
-    },
+    }
+    ,
     {
       "displayName": "mausoleum",
       "resourceCondition": ["paper","glass","glass","clay","clay"],
