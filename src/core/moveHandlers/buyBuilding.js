@@ -27,12 +27,14 @@ export const buyBuilding = (state, player, {building}) => {
     const id = state.players.indexOf(player)
     state.cities[id].buildings.push(building)
 
-    // flip the cards up
+    // TODO : apply card special benefits
+
+    // flip the cards up in the upper stage
     const topStage = state.pyramid[state.pyramid.indexOf(targetStage) - 1]
     if(topStage) {
         // find the top cards
         const offset = topStage.length - targetStage.length
-        const topCardIndexes = [buildingIndex, buildingIndex + offset] // todo
+        const topCardIndexes = [buildingIndex, buildingIndex + offset]
         const topCards = topCardIndexes.map(i => topStage[i]).filter(card => card)
         // filter only the top cards with no more children
         topCards.filter(topCard => {
@@ -43,10 +45,16 @@ export const buyBuilding = (state, player, {building}) => {
         }).forEach(topCard => delete topCard.faceDown)
     }
 
-    // TODO : apply card special benefits
+    // if all buildings have been claimed, start next age or end the game
+    if(state.pyramid.some(stage => stage.some(card => card))) {
+        return []
+    } else if(state.age <3) {
+        return [startAge(state.age + 1)]
+    } else {
+        return [endGame()]
+    }
 
-    // TODO : start next age phase if all buildings have been claimed
-    return state.pyramid.some(stage => stage.some(card => card)) ? [] : [startAge(state.age + 1)]
+    return  []
 }
 
 /* This is an unused draft */

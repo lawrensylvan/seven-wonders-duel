@@ -4,92 +4,113 @@
     "age": 1,
     "color": "brown",
     "production": ["wood"]
-  },
+  }
+  ,
   {
     "name": "loggingcamp",
     "age": 1,
     "color": "brown",
     "price": 1,
     "production": ["wood"]
-  },
+  }
+  ,
   {
     "name": "claypool",
     "age": 1,
     "color": "brown",
     "production": ["clay"]
-  },
+  }
+  ,
   {
     "name": "claypit",
     "age": 1,
     "color": "brown",
     "price": 1,
     "production": ["clay"]
-  },
+  }
+  ,
   {
     "name": "quarry",
     "age": 1,
     "color": "brown",
     "production": ["stone"]
-  },
+  }
+  ,
   {
     "name": "stonepit",
     "age": 1,
     "color": "brown",
     "price": 1,
     "production": ["stone"]
-  },
+  }
+  ,
   {
     "name": "glassworks",
     "age": 1,
     "color": "gray",
     "price": 1,
     "production": ["glass"]
-  },
+  }
+  ,
   {
     "name": "press",
     "age": 1,
     "color": "gray",
     "price": 1,
     "production": ["paper"]
-  },
+  }
+  ,
   {
     "name": "guardtower",
     "age": 1,
     "color": "red",
-    "nextActions": ["goMilitary(1)"]
-  },
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 1}
+    ]
+  }
+  ,
   {
     "name": "stable",
     "age": 1,
     "color": "red",
     "requirements": ["wood"],
     "chainAccess": "horseshoe",
-    "nextActions": ["goMilitary(1)"]
-  },
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 1}
+    ]
+  }
+  ,
   {
     "name": "garrison",
     "age": 1,
     "color": "red",
     "requirements": ["clay"],
     "chainAccess": "sword",
-    "nextActions": ["goMilitary(1)"]
-  },
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 1}
+    ]
+  }
+  ,
   {
     "name": "palisade",
     "age": 1,
     "color": "red",
     "price": 2,
     "chainAccess": "tower",
-    "nextActions": ["goMilitary(1)"]
-  },
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 1}
+    ]
+  }
+  ,
   {
     "name": "workshop",
     "age": 1,
     "color": "green",
-    "requirements": "{paper}",
+    "requirements": ["paper"],
     "victoryPoints": 1,
     "scienceSymbol": "plump_bob"
-  },
+  }
+  ,
   {
     "name": "apothecary",
     "age": 1,
@@ -97,16 +118,17 @@
     "requirements": ["glass"],
     "victoryPoints": 1,
     "scienceSymbol": "wheel"
-  },
+  }
+  ,
   {
     "name": "scriptorium",
     "age": 1,
     "color": "green",
     "price": 2,
-    "victoryPoints": 0,
     "scienceSymbol": "inkpen",
     "chainAccess": "book"
-  },
+  }
+  ,
   {
     "name": "pharmacist",
     "age": 1,
@@ -114,21 +136,24 @@
     "price": 2,
     "scienceSymbol": "mortar",
     "chainAccess": "gear"
-  },
+  }
+  ,
   {
     "name": "theater",
     "age": 1,
     "color": "blue",
     "victoryPoints": 3,
     "chainAccess": "mask"
-  },
+  }
+  ,
   {
     "name": "altar",
     "age": 1,
     "color": "blue",
     "victoryPoints": 3,
     "chainAccess": "moon"
-  },
+  }
+  ,
   {
     "name": "baths",
     "age": 1,
@@ -136,593 +161,443 @@
     "requirements": ["stone"],
     "victoryPoints": 3,
     "chainAccess": "drop"
-  },
+  }
+  ,
   {
     "name": "stonereserve",
     "age": 1,
     "color": "yellow",
     "price": 3,
-    "nextActions": ["changeRate(stone, 1)"]
-  },
+    "immediateEffects": ["changeRate(stone, 1) TODO : permanent effect"]
+  }
+  ,
   {
     "name": "clayreserve",
     "age": 1,
     "color": "yellow",
     "price": 3,
-    "nextActions": ["changeRate(clay, 1)"]
-  },
+    "immediateEffects": ["changeRate(clay, 1) TODO : permanent effect"]
+  }
+  ,
   {
     "name": "woodreserve",
     "age": 1,
     "color": "yellow",
     "price": 3,
-    "victoryPoints": 0,
-    "nextActions": ["changeRate(wood, 1)"]
-  },
+    "immediateEffects": ["changeRate(wood, 1) TODO : permanent effect"]
+  }
+  ,
   {
     "name": "tavern",
     "age": 1,
     "color": "yellow",
     "chainAccess": "jar",
-    "nextActions": ["getMoney(4)"]
-  },
+    "immediateEffects": [
+      {"type": "gainMoney", "coins": 4}
+    ]
+  }
+  ,
   {
     "name": "sawmill",
     "age": 2,
     "color": "brown",
-    "requirements": [],
     "price": 2,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "{wood, wood}",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "production": ["wood", "wood"]
+  }
+  ,
   {
     "name": "brickyard",
     "age": 2,
     "color": "brown",
-    "requirements": [],
     "price": 2,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "{clay, clay}",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "production": ["clay", "clay"]
+  }
+  ,
   {
     "name": "shelfquarry",
     "age": 2,
     "color": "brown",
-    "requirements": [],
     "price": 2,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "{stone, stone}",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "production": ["stone", "stone"]
+  }
+  ,
   {
     "name": "glassblower",
     "age": 2,
     "color": "gray",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "{glass}",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "production": ["glass"]
+  }
+  ,
   {
     "name": "dryingroom",
     "age": 2,
     "color": "gray",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "{paper}",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "production": ["paper"]
+  }
+  ,
   {
     "name": "walls",
     "age": 2,
     "color": "red",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(2)}"
-  },
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 2}
+    ]
+  }
+  ,
   {
     "name": "horsebreeders",
     "age": 2,
     "color": "red",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": "{horseshoe}",
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(1)}"
-  },
+    "chainCondition": "horseshoe",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 1}
+    ]
+  }
+  ,
   {
     "name": "barracks",
     "age": 2,
     "color": "red",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": "{sword}",
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(1)}"
-  },
+    "chainCondition": "sword",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 1}
+    ]
+  }
+  ,
   {
     "name": "archeryrange",
     "age": 2,
     "color": "red",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": "{target}",
-    "nextActions": "{goMilitary(2)}"
-  },
+    "chainAccess": "target",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 2}
+    ]
+  }
+  ,
   {
     "name": "paradeground",
     "age": 2,
     "color": "red",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": "{helmet}",
-    "nextActions": "{goMilitary(2)}"
-  },
+    "chainAccess": "helmet",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 2}
+    ]
+  }
+  ,
   {
     "name": "library",
     "age": 2,
     "color": "green",
-    "requirements": "{stone,wood,glass}",
-    "price": 0,
-    "chainCondition": "{book}",
+    "requirements": ["stone","wood","glass"],
+    "chainCondition": "book",
     "victoryPoints": 2,
-    "scienceSymbol": "{inkpen}",
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "scienceSymbol": "inkpen"
+  }
+  ,
   {
     "name": "dispensary",
     "age": 2,
     "color": "green",
-    "requirements": "{clay,clay,stone}",
-    "price": 0,
-    "chainCondition": "{gear}",
+    "requirements": ["clay","clay","stone"],
+    "chainCondition": "gear",
     "victoryPoints": 2,
-    "scienceSymbol": "{mortar}",
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "scienceSymbol": "mortar"
+  }
+  ,
   {
     "name": "school",
     "age": 2,
     "color": "green",
-    "requirements": "{wood,paper,paper}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["wood","paper","paper"],
     "victoryPoints": 1,
-    "scienceSymbol": "{wheel}",
-    "production": "",
-    "chainAccess": "{lyre}",
-    "nextActions": []
-  },
+    "scienceSymbol": "wheel",
+    "chainAccess": "lyre"
+  }
+  ,
   {
     "name": "laboratory",
     "age": 2,
     "color": "green",
-    "requirements": "{wood,glass,glass}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["wood","glass","glass"],
     "victoryPoints": 1,
-    "scienceSymbol": "{plump_bob}",
-    "production": "",
-    "chainAccess": "{teapot}",
-    "nextActions": []
-  },
+    "scienceSymbol": "plump_bob",
+    "chainAccess": "teapot"
+  }
+  ,
   {
     "name": "tribunal",
     "age": 2,
     "color": "blue",
-    "requirements": "{wood,wood,glass}",
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 5,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["wood","wood","glass"],
+    "victoryPoints": 5
+  }
+  ,
   {
     "name": "statue",
     "age": 2,
     "color": "blue",
-    "requirements": "{clay,clay}",
-    "price": 0,
-    "chainCondition": "{mask}",
+    "requirements": ["clay","clay"],
+    "chainCondition": "mask",
     "victoryPoints": 4,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": "{ornament}",
-    "nextActions": []
-  },
+    "chainAccess": "ornament"
+  }
+  ,
   {
     "name": "temple",
     "age": 2,
     "color": "blue",
-    "requirements": "{book,paper}",
-    "price": 0,
-    "chainCondition": "{moon}",
+    "requirements": ["book","paper"],
+    "chainCondition": "moon",
     "victoryPoints": 4,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": "{sun}",
-    "nextActions": []
-  },
+    "chainAccess": "sun"
+  }
+  ,
   {
     "name": "aqueduct",
     "age": 2,
     "color": "blue",
-    "requirements": "{stone,stone,stone}",
-    "price": 0,
-    "chainCondition": "{drop}",
-    "victoryPoints": 5,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["stone","stone","stone"],
+    "chainCondition": "drop",
+    "victoryPoints": 5
+  }
+  ,
   {
     "name": "rostrum",
     "age": 2,
     "color": "blue",
-    "requirements": "{stone,wood}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["stone","wood"],
     "victoryPoints": 4,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": "{peripteros}",
-    "nextActions": []
-  },
+    "chainAccess": "peripteros"
+  }
+  ,
   {
     "name": "forum",
     "age": 2,
     "color": "yellow",
-    "requirements": "{clay}",
+    "requirements": ["clay"],
     "price": 3,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{giveEither(glass,paper)}"
-  },
+    "production": [["glass", "paper"]]
+  }
+  ,
   {
     "name": "caravansery",
     "age": 2,
     "color": "yellow",
-    "requirements": "{glass,paper}",
+    "requirements": ["glass","paper"],
     "price": 2,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{giveEither(wood,clay,stone)}"
-  },
+    "production": [["wood", "clay", "stone"]]
+  }
+  ,
   {
     "name": "customshouse",
     "age": 2,
     "color": "yellow",
-    "requirements": [],
     "price": 4,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{changeRate(paper, 1),changeRate(glass,1)}"
-  },
+    "immediateEffects": "{changeRate(paper, 1),changeRate(glass,1)} TODO : permanent action"
+  }
+  ,
   {
     "name": "brewery",
     "age": 2,
     "color": "yellow",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": "{barrel}",
-    "nextActions": "{getMoney(6)}"
-  },
+    "chainAccess": "barrel",
+    "immediateEffects": [
+      {"type": "gainMoney", "coins": 6}
+    ]
+  }
+  ,
   {
     "name": "arsenal",
     "age": 3,
     "color": "red",
-    "requirements": "{clay,clay,clay,wood,wood}",
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(3)}"
-  },
+    "requirements": ["clay","clay","clay","wood","wood"],
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 3}
+    ]
+  }
+  ,
   {
     "name": "courthouse",
     "age": 3,
     "color": "red",
-    "requirements": [],
     "price": 8,
-    "chainCondition": [],
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(3)}"
-  },
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 3}
+    ]
+  }
+  ,
   {
     "name": "fortifications",
     "age": 3,
     "color": "red",
-    "requirements": "{stone,stone,clay,paper}",
-    "price": 0,
-    "chainCondition": "{tower}",
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(2)}"
-  },
+    "requirements": ["stone","stone","clay","paper"],
+    "chainCondition": "tower",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 2}
+    ]
+  }
+  ,
   {
     "name": "siegeworkshop",
     "age": 3,
     "color": "red",
-    "requirements": "{wood,wood,wood,glass}",
-    "price": 0,
-    "chainCondition": "{target}",
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(2)}"
-  },
+    "requirements": ["wood","wood","wood","glass"],
+    "chainCondition": "target",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 2}
+    ]
+  }
+  ,
   {
     "name": "circus",
     "age": 3,
     "color": "red",
-    "requirements": "{clay,clay,stone,stone}",
-    "price": 0,
-    "chainCondition": "{helmet}",
-    "victoryPoints": 0,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{goMilitary(2)}"
-  },
+    "requirements": ["clay","clay","stone","stone"],
+    "chainCondition": "helmet",
+    "immediateEffects": [
+      {"type": "goMilitary", "amount": 2}
+    ]
+  }
+  ,
   {
     "name": "academy",
     "age": 3,
     "color": "green",
-    "requirements": "{stone,wood,glass,glass}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["stone","wood","glass","glass"],
     "victoryPoints": 3,
-    "scienceSymbol": "{sundial}",
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "scienceSymbol": "sundial"
+  }
+  ,
   {
     "name": "study",
     "age": 3,
     "color": "green",
-    "requirements": "{wood,wood,glass,paper}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["wood","wood","glass","paper"],
     "victoryPoints": 3,
-    "scienceSymbol": "{sundial}",
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "scienceSymbol": "sundial"
+  }
+  ,
   {
     "name": "university",
     "age": 3,
     "color": "green",
-    "requirements": "{clay,glass,paper}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["clay","glass","paper"],
     "victoryPoints": 2,
-    "scienceSymbol": "{globe}",
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "scienceSymbol": "globe"
+  }
+  ,
   {
     "name": "observatory",
     "age": 3,
     "color": "green",
-    "requirements": "{stone,paper,paper}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["stone","paper","paper"],
     "victoryPoints": 2,
-    "scienceSymbol": "{globe}",
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "scienceSymbol": "globe"
+  }
+  ,
   {
     "name": "palace",
     "age": 3,
     "color": "blue",
-    "requirements": "{clay,stone,wood,glass,glass}",
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 7,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["clay","stone","wood","glass","glass"],
+    "victoryPoints": 7
+  }
+  ,
   {
     "name": "townhall",
     "age": 3,
     "color": "blue",
-    "requirements": "{stone,stone,stone,wood,wood}",
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 7,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["stone","stone","stone","wood","wood"],
+    "victoryPoints": 7
+  }
+  ,
   {
     "name": "obelisk",
     "age": 3,
     "color": "blue",
-    "requirements": "{stone,stone,wood}",
-    "price": 0,
-    "chainCondition": [],
-    "victoryPoints": 5,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["stone","stone","wood"],
+    "victoryPoints": 5
+  }
+  ,
   {
     "name": "gardens",
     "age": 3,
     "color": "blue",
-    "requirements": "{clay,clay,wood,wood}",
-    "price": 0,
-    "chainCondition": "{ornament}",
-    "victoryPoints": 6,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["clay","clay","wood","wood"],
+    "chainCondition": "ornament",
+    "victoryPoints": 6
+  }
+  ,
   {
     "name": "pantheon",
     "age": 3,
     "color": "blue",
-    "requirements": "{clay,wood,paper,paper}",
-    "price": 0,
+    "requirements": ["clay","wood","paper","paper"],
     "chainCondition": "{sun}",
-    "victoryPoints": 6,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "victoryPoints": 6
+  }
+  ,
   {
     "name": "senate",
     "age": 3,
     "color": "blue",
-    "requirements": "{clay,clay,stone,paper}",
-    "price": 0,
-    "chainCondition": "{peripteros}",
-    "victoryPoints": 5,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": []
-  },
+    "requirements": ["clay","clay","stone","paper"],
+    "chainCondition": "peripteros",
+    "victoryPoints": 5
+  }
+  ,
   {
     "name": "chamberofcommerce",
     "age": 3,
     "color": "yellow",
-    "requirements": "{paper,paper}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["paper","paper"],
     "victoryPoints": 3,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{getMoneyByCardOf(3, manufactured_good, self)}"
-  },
+    "immediateEffects": [
+      {"type":"gainForBuiltBuildings", "coins": 3, "inBothCities": false, "colors": "gray"}
+    ]
+  }
+  ,
   {
     "name": "port",
     "age": 3,
     "color": "yellow",
-    "requirements": "{wood,glass,paper}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["wood","glass","paper"],
     "victoryPoints": 3,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{getMoneyByCardOf(2, raw_material, self)}"
-  },
+    "immediateEffects": [
+      {"type":"gainForBuiltBuildings", "coins": 2, "inBothCities": false, "colors": "brown"}
+    ]
+  }
+  ,
   {
     "name": "armory",
     "age": 3,
     "color": "yellow",
-    "requirements": "{stone,stone,glass}",
-    "price": 0,
-    "chainCondition": [],
+    "requirements": ["stone","stone","glass"],
     "victoryPoints": 3,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{getMoneyByCardOf(1, military_building, self)}"
-  },
+    "immediateEffects": [
+      {"type":"gainForBuiltBuildings", "coins": 1, "inBothCities": false, "colors": "red"}
+    ]
+  }
+  ,
   {
     "name": "lighthouse",
     "age": 3,
     "color": "yellow",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": "{jar}",
+    "chainCondition": "jar",
     "victoryPoints": 3,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{getMoneyByCardOf(1, commercial_building, self)}"
-  },
+    "immediateEffects": [
+      {"type":"gainForBuiltBuildings", "coins": 1, "inBothCities": false, "colors": "green"}
+    ]
+  }
+  ,
   {
     "name": "arena",
     "age": 3,
     "color": "yellow",
-    "requirements": [],
-    "price": 0,
-    "chainCondition": "{barrel}",
+    "chainCondition": "barrel",
     "victoryPoints": 3,
-    "scienceSymbol": [],
-    "production": "",
-    "chainAccess": [],
-    "nextActions": "{getMoneyByCompletedWonder(1, self)}"
+    "immediateEffects": [
+      {"type":"gainForBuiltWonders", "coins": 2, "inBothCities": false}
+    ]
   }
 ]

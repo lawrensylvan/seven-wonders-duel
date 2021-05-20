@@ -1,0 +1,102 @@
+[
+    {
+      "displayName": "piraeus",
+      "resourceCondition": ["clay","stone","wood","wood"],
+      "victoryValue": 2,
+      "production": [["glass", "paper"]],
+      "immediateEffects": [
+        {"type": "playAgain"}
+      ]
+    },
+    {
+      "displayName": "pyramids",
+      "resourceCondition": ["paper","stone","stone","stone"],
+      "victoryValue": 9
+    },
+    {
+      "displayName": "sphinx",
+      "resourceCondition": ["glass","glass","clay","stone"],
+      "victoryValue": 6,
+      "immediateEffects": [
+        {"type": "playAgain"}
+      ]
+    }
+    ,
+    {
+      "displayName": "zeus",
+      "resourceCondition": ["paper","paper","clay","wood","stone"],
+      "victoryValue": 3,
+      "immediateEffects": [
+        {"type": "offerBuildingDestruction", "color": "brown"},
+        {"type": "goMilitary", "amount": 1}
+      ]
+    }
+    ,
+    {
+      "displayName": "appianway",
+      "resourceCondition": ["paper","clay","clay","stone","stone"],
+      "victoryValue": 3,
+      "immediateEffects": [
+        {"type": "gainMoney", "amount": 3},
+        {"type": "destroyMoney", "amount": 3},
+        {"type": "playAgain"}
+      ]
+    },
+    {
+      "displayName": "templeofartemis",
+      "resourceCondition": ["paper","glass","stone","wood"],
+      "immediateEffects": [
+        {"type": "gainMoney", "amount": 12},
+        {"type": "playAgain"}
+      ]
+    },
+    {
+      "displayName": "circusmaximus",
+      "resourceCondition": ["glass","wood","stone","stone"],
+      "victoryValue": 3,
+      "immediateEffects": [
+        {"type": "offerBuildingDestruction", "color": "gray"},
+        {"type": "goMilitary", "amount": 1}
+      ]
+    },
+    {
+      "displayName": "colossus",
+      "resourceCondition": ["glass","clay","clay","clay"],
+      "victoryValue": 3,
+      "immediateEffects": [
+        {"type": "goMilitary", "amount": 2}
+      ]
+    },
+    {
+      "displayName": "greatlighthouse",
+      "resourceCondition": ["paper","paper","stone","wood"],
+      "victoryValue": 4,
+      "production": [["wood", "stone", "clay"]]
+    },
+    {
+      "displayName": "greatlibrary",
+      "resourceCondition": ["paper","glass","wood","wood","wood"],
+      "victoryValue": 4,
+      "immediateEffects": [
+        {"type": "offerProgressTokenFromTrash", "amount": 1, "amongst": 3}
+      ]
+    },
+    {
+      "displayName": "hanginggardens",
+      "resourceCondition": ["paper","glass","wood","wood"],
+      "victoryValue": 3,
+      "immediateEffects": [
+        {"type": "gainMoney", "coins": 6},
+        {"type": "playAgain"}
+      ]
+      
+    },
+    {
+      "displayName": "mausoleum",
+      "resourceCondition": ["paper","glass","glass","clay","clay"],
+      "victoryValue": 2,
+      "immediateActions": [
+          {"type": "offerBuildingFromTrash", "amount": 1, "isFree": false}
+      ]
+    }
+  ]

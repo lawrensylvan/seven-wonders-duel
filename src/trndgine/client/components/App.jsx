@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { Lobby } from './Lobby'
 import { Table } from './Table'
 import { Login } from './Login'
-import { DebugAnimation } from '../../../client/components/DebugAnimation'
 
 export const App = () => {
     
@@ -35,14 +34,6 @@ export const App = () => {
                 {session.isLoggedIn
                         ?   <Table/>
                         :   <Redirect to='/login'/>}
-            </Route>
-
-            <Route exact path="/debug/game">
-                <Table/>
-            </Route>
-
-            <Route exact path="/debug/animations">
-                <DebugAnimation/>
             </Route>
 
         </Switch>

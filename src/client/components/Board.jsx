@@ -12,7 +12,6 @@ import { Wonder } from './Wonder'
 
 export const Board = ({state}) => {
 
-    console.dir(state)
     const dispatch = useDispatch()
 
     const exitThenFlipThenEnter = ({
@@ -24,6 +23,18 @@ export const Board = ({state}) => {
         hideEnteringElements();
         animateExitingElements()
           .then(animateFlippedElements)
+          .then(animateEnteringElements);
+      };
+
+      const flipThenExitThenEnter = ({
+        hideEnteringElements,
+        animateEnteringElements,
+        animateExitingElements,
+        animateFlippedElements
+      }) => {
+        hideEnteringElements();
+        animateFlippedElements()
+          .then(animateExitingElements)
           .then(animateEnteringElements);
       };
 
@@ -40,7 +51,7 @@ export const Board = ({state}) => {
       };
 
     return (
-        <Flipper flipKey={state} handleEnterUpdateDelete={exitThenFlipThenEnter} >
+        <Flipper flipKey={state} handleEnterUpdateDelete={flipThenExitThenEnter} >
             <div id="all">
 
                 {state.discard && 
@@ -66,7 +77,7 @@ export const Board = ({state}) => {
                 {state.pyramid && 
                     <div id="pyramid">
                         {state.pyramid.map((stage, stageIdx) => {
-                            return <div className='pyramidStage' key={stageIdx}>
+                            return <div className="pyramidStage" key={stageIdx}>
                                 {stage.map((building, buildingIdx) => {
                                     return <Building name={building} onClick={()=>dispatch(actions.play(1, buyBuilding(building)))}
                                                      age={state.age} key={buildingIdx} globalKey={stageIdx*10+buildingIdx} />
@@ -76,7 +87,7 @@ export const Board = ({state}) => {
                     </div>
                 }
 
-                {state.cities && state.cities[0] &&
+                {state.cities?.[0] &&
                     <div id="city1">
                         <div className="wonderContainer">
                             {state.cities[0].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
@@ -87,7 +98,7 @@ export const Board = ({state}) => {
                     </div>
                 }
 
-                {state.cities && state.cities[1] &&
+                {state.cities?.[1] &&
                     <div id="city2">
                         {state.cities[1].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                     </div>

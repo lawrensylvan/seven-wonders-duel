@@ -8,7 +8,9 @@
 }
 
 body {
-	background-color : #EEEEE0;
+  background-image: linear-gradient(rgb(255, 255, 255, 0), rgb(255, 250, 206)),
+                    url("../assets/backgrounds/7wonders-2.jpg");
+  
 }
 
 /* Borders on all elements for debugging purposes */
