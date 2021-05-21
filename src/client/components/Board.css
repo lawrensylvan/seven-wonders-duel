@@ -275,7 +275,7 @@ body {
 }
 
 .brown  { grid-column: 1/2; }
-.grey   { grid-column: 2/3; }
+.gray   { grid-column: 2/3; }
 .yellow { grid-column: 3/4; }
 .blue   { grid-column: 4/5; }
 .red    { grid-column: 5/6; }

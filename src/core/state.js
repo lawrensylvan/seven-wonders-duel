@@ -12,7 +12,7 @@ export const GameState = (players) => {
         
         discardPile: [],
 
-        wondersToSelect: ['greatLibrary', 'sphinx', 'mausoleum', 'pyramids'],
+        wondersToSelect: ['greatlibrary', 'sphinx', 'mausoleum', 'pyramids'],
 
         pyramid: [],
 

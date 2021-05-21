@@ -1,6 +1,6 @@
-import { applyCardBenefits } from '../events'
 import { _ } from 'lodash'
-import {startAge} from '../events'
+
+import { nextAge } from '../events'
 
 export const buyBuilding = (state, player, {building}) => {
     // check that the building is indeed in the pyramid
@@ -27,8 +27,15 @@ export const buyBuilding = (state, player, {building}) => {
     const id = state.players.indexOf(player)
     state.cities[id].buildings.push(building)
 
+    // TODO : replace the following by this :
+    /*let nextEvents = [
+        applyBuildingEffects(building, player), // will apply both permanent and immediate effects
+        unleashPyramid(),
+        state.pyramid.some(stage => stage.some(card => card)) ? undefined : nextAge()
+    ]*/
+
     // TODO : add building permanent effects to player special powers
-    
+
     // TODO : apply building immediate effects
 
     // flip the cards up in the upper stage
@@ -51,7 +58,7 @@ export const buyBuilding = (state, player, {building}) => {
     if(state.pyramid.some(stage => stage.some(card => card))) {
         return []
     } else if(state.age <3) {
-        return [startAge(state.age + 1)]
+        return [nextAge()]
     } else {
         return [endGame()]
     }

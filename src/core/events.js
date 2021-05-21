@@ -1,5 +1,5 @@
-export const startAge = (age) => ({
-    type: 'startAge',
+export const nextAge = (age) => ({
+    type: 'nextAge',
     age
 })
 

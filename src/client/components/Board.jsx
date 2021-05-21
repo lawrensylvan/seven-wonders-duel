@@ -10,9 +10,11 @@ import { ProgressToken } from './ProgressToken'
 import { Building } from './Building'
 import { Wonder } from './Wonder'
 
-export const Board = ({state}) => {
+export const Board = ({state, player}) => {
 
     const dispatch = useDispatch()
+
+    const playerId = state.players.indexOf(player)
 
     const exitThenFlipThenEnter = ({
         hideEnteringElements,
@@ -87,20 +89,19 @@ export const Board = ({state}) => {
                     </div>
                 }
 
-                {state.cities?.[0] &&
+                {state.cities?.[playerId] &&
                     <div id="city1">
                         <div className="wonderContainer">
-                            {state.cities[0].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
+                            {state.cities[playerId].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                         </div>
                         <div className="buildingContainer">
-                            {state.cities[0].buildings.map((building, i) => <Building name={building} key={i} />)}
+                            {state.cities[playerId].buildings.map((building, i) => <Building name={building} key={i} />)}
                         </div>
                     </div>
                 }
-
-                {state.cities?.[1] &&
+                {state.cities?.[playerId ? 0 : 1] &&
                     <div id="city2">
-                        {state.cities[1].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
+                        {state.cities[playerId ? 0 : 1].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                     </div>
                 }
 

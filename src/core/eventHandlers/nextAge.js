@@ -1,5 +1,5 @@
 import { _ } from 'lodash' 
-import allBuildings from '../../core/cardsInfos/buildings.json'
+import allBuildings from '../cardsInfos/buildings.json'
 
 // 1 = visible card, 0 = face down card, null = gap
 const pyramidStructure = {
@@ -30,22 +30,24 @@ const pyramidStructure = {
     ],
 }
 
-export const startAge = (state, {age}) => {
+export const nextAge = (state) => {
     // switch to next age
-    state.age = age
+    state.age = (state.age ?? 0) + 1
 
     // shuffle age deck of building
-    let ageBuildings = _.shuffle(allBuildings.filter(b => b.age === age))
+    let ageBuildings = _.shuffle(allBuildings.filter(b => b.age === state.age))
 
     // TODO : if age 3, pick 3 guilds out of 7
     
     // fill pyramid according to structure (null stands for empty spaces in pyramid between cards)
-    state.pyramid = pyramidStructure[age].map(stage => stage.map(code => {
+    state.pyramid = pyramidStructure[state.age].map(stage => stage.map(code => {
         switch (code) {
             case 1: return {building: ageBuildings.pop().name}
             case 0: return {building: ageBuildings.pop().name, faceDown: true}
             case null: return null
         }}))
+
+    // TODO determine next player
 
     return []
 }

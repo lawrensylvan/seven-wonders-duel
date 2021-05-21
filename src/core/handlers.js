@@ -1,6 +1,6 @@
 import { selectWonder } from './moveHandlers/selectWonder'
 import { buyBuilding } from './moveHandlers/buyBuilding'
-import { startAge } from './eventHandlers/startAge'
+import { nextAge } from './eventHandlers/nextAge'
 
 export const moveHandlers = {
     selectWonder,
@@ -8,5 +8,5 @@ export const moveHandlers = {
 }
 
 export const eventHandlers = {
-    startAge
+    nextAge
 }

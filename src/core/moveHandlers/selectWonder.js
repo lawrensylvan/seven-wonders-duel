@@ -1,4 +1,4 @@
-import {startAge} from '../events'
+import { nextAge } from '../events'
 
 export const selectWonder = (state, player, {wonder}) => {
     // check if move is valid
@@ -17,5 +17,5 @@ export const selectWonder = (state, player, {wonder}) => {
     }
 
     // start age 1 phase if all wonders have been claimed
-    return wondersLeft ? [] : [startAge(1)]
+    return wondersLeft ? [] : [nextAge()]
 }

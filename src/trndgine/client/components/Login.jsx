@@ -20,7 +20,7 @@ export const Login = () => {
         dispatch(actions.login(user, password))
     }
 
-    return <>
+    return <div className="login">
         <h2>Login or sign up</h2>
 
         <form onSubmit={handleSubmit}>
@@ -40,5 +40,5 @@ export const Login = () => {
             <button>Login</button>
 
         </form>
-    </>
+    </div>
 }
