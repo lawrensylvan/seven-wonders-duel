@@ -31,6 +31,9 @@ const pyramidStructure = {
 }
 
 export const nextAge = (state) => {
+    // if end of age 3, end the game
+    if(state.age === 3) return [endGame()]
+
     // switch to next age
     state.age = (state.age ?? 0) + 1
 

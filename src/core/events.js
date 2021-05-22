@@ -7,6 +7,18 @@ export const endGame = () => ({
     type: 'endGame'
 })
 
+export const applyBuildingEffects = (player, building) => ({
+    type: 'applyBuildingEffects',
+    player,
+    building
+})
+
+export const flipPyramidBuildings = (targetStage, buildingIndex) => ({
+    type: 'flipPyramidBuildings',
+    targetStage,
+    buildingIndex
+})
+
 /* Common effects of buildings, wonders and progress tokens */
 
 export const gainMoney = (player, coins) => ({

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Flipper } from 'react-flip-toolkit'
 import { actions } from '../../trndgine/client/store/actions'
 import { selectWonder, buyBuilding } from '../../core/moves'

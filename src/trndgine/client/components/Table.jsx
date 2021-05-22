@@ -19,6 +19,15 @@ export const Table = () => {
         dispatch(actions.getGameState(id))
     }, [])
 
+    // Consume the game patches one by one with interval
+    /*useEffect(() => {
+        console.log('Will try to pop last game patch in 4 seconds')
+        setTimeout(() => {
+            console.log('4 seconds gone, now lets consume patch')
+            dispatch({type: 'consumePatch'})
+        }, 4000)
+    }, [game?.steps?.length])*/
+
     return <>   
         {game && game.state && <Board state={game.state} player={session.name} />}
     </>
