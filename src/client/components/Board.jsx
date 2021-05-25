@@ -80,8 +80,10 @@ export const Board = ({state, player}) => {
                         {state.pyramid.map((stage, stageIdx) => {
                             return <div className="pyramidStage" key={stageIdx}>
                                 {stage.map((building, buildingIdx) => {
-                                    return <Building name={building} onClick={()=>dispatch(actions.play(1, buyBuilding(building)))}
-                                                     age={state.age} key={buildingIdx} globalKey={stageIdx*10+buildingIdx} />
+                                    return <Building    building={building} age={state.age}
+                                                        key={buildingIdx} globalKey={stageIdx*10+buildingIdx}
+                                                        onClick={()=>dispatch(actions.play(1, buyBuilding(building?.name)))}
+                                            />
                                 })}
                             </div>})
                         }
@@ -94,7 +96,7 @@ export const Board = ({state, player}) => {
                             {state.cities[playerId].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
                         </div>
                         <div className="buildingContainer">
-                            {state.cities[playerId].buildings.map((building, i) => <Building name={building} key={i} />)}
+                            {state.cities[playerId].buildings.map((building, i) => <Building building={building} key={i} />)}
                         </div>
                     </div>
                 }
@@ -114,41 +116,3 @@ export const Board = ({state, player}) => {
         </Flipper>
     )
 }
-
-/*
-
-<div id="board">
-                <img className="militaryBoard" height={200} src="https://drive.google.com/uc?id=15ymwgfrotxoMKMKlBWTAScGML8Ya9x20" draggable="false" />
-                <img className="conflictPawn" style={{left: `calc( (50% - 0.9%) + ${pos}*4.8%)`}}
-                    src="https://drive.google.com/uc?id=10BfV3OX6lWOiPHCetvoYUnS69pTy_NN3" draggable="false"
-                    onClick={()=> setPos(pos+1)} />
-            </div>
-
-<MilitaryBoard position={state.militaryPosition} tokens={state.progressTokens}/>
-<MilitaryBoard position={state.militaryPosition} tokens={state.progressTokens} id="board" />
-<Trash cards={state.trash} />
-<Pyramid age={state.age} cards={state.pyramid} />
-<City player={state.city} mode="self" />
-<City player={state.opponentCity} mode="opponent" />
-*/
-
-/*
-
-return (
-        <div id="all">
-            <div id="discard"></div>
-            <div id="board">
-                <img className={css.militaryBoard} height={200} src="https://drive.google.com/uc?id=15ymwgfrotxoMKMKlBWTAScGML8Ya9x20" draggable="false" />
-                <img className={css.conflictPawn} src="https://drive.google.com/uc?id=10BfV3OX6lWOiPHCetvoYUnS69pTy_NN3" draggable="false" />
-            </div>
-            <div id="pyramid"></div>
-
-            <div id="city1"></div>
-
-            <div id="city2"></div>
-
-            <div id="infos"></div>
-        
-        </div>
-    )
-    */

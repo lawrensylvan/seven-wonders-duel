@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../store/actions'
+import { v4 } from 'uuid'
 
 export const Login = () => {
 
     const session = useSelector(state => state.session)
     const dispatch = useDispatch()
     
-    const [user, setUser] = useState('')
-    const [password, setPassword] = useState('')
+    const [user, setUser] = useState(v4().slice(0, 5))
+    const [password, setPassword] = useState(v4().slice(0, 5))
 
     if(session.isLoggedIn) {
         return <Redirect to="/lobby"/>    
@@ -28,7 +29,8 @@ export const Login = () => {
             <input type="text"
                 value={user}
                 onChange={(e)=>setUser(e.target.value)}
-                placeholder="Enter your new/existing username">
+                placeholder="Enter your new/existing username"
+                autoFocus>
             </input>
             
             <input type="password"

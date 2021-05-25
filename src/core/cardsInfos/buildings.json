@@ -596,6 +596,7 @@
     "name": "lighthouse",
     "age": 3,
     "color": "yellow",
+    "requirements": ["clay","clay","glass"],
     "chainCondition": "jar",
     "victoryPoints": 3,
     "immediateEffects": [
@@ -607,10 +608,82 @@
     "name": "arena",
     "age": 3,
     "color": "yellow",
+    "requirements": ["clay","stone","wood"],
     "chainCondition": "barrel",
     "victoryPoints": 3,
     "immediateEffects": [
       {"type":"gainForBuiltWonders", "coins": 2, "inBothCities": false}
+    ]
+  }
+  ,
+  {
+    "name": "buildersguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["stone","stone","clay","wood","glass"],
+    "permanentEffects": [
+      {"type": "victoryPointsForBuiltWonders", "victoryPoints": 2, "inBothCities": true}
+    ]
+  }
+  ,
+  {
+    "name": "magistratesguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["wood","wood","clay","paper"],
+    "permanentEffects": [
+      {"type": "victoryPointsForBuildings", "victoryPoints": 1, "color": "blue", "inBothCities": true}
+    ]
+  }
+  ,
+  {
+    "name": "merchantsguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["clay","wood","glass","paper"],
+    "permanentEffects": [
+      {"type": "victoryPointsForBuildings", "victoryPoints": 1, "color": "yellow", "inBothCities": true}
+    ]
+  }
+  ,
+  {
+    "name": "moneylendersguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["stone","stone","wood","wood"],
+    "permanentEffects": [
+      {"type": "victoryPointsForCoins", "coinsPerPoint": 3, "inBothCities": true}
+    ]
+  }
+  ,
+  {
+    "name": "scientistsguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["clay","clay","wood","wood"],
+    "permanentEffects": [
+      {"type": "victoryPointsForBuildings", "victoryPoints": 1, "color": "green", "inBothCities": true}
+    ]
+  }
+  ,
+  {
+    "name": "shipownersguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["clay","stone","glass","paper"],
+    "permanentEffects": [
+      {"type": "victoryPointsForBuildings", "victoryPoints": 1, "color": "brown", "inBothCities": true},
+      {"type": "victoryPointsForBuildings", "victoryPoints": 1, "color": "gray", "inBothCities": true}
+    ]
+  }
+  ,
+  {
+    "name": "tacticiansguild",
+    "age": 3,
+    "color": "purple",
+    "requirements": ["stone","stone","clay","paper"],
+    "permanentEffects": [
+      {"type": "victoryPointsForBuildings", "victoryPoints": 1, "color": "red", "inBothCities": true}
     ]
   }
 ]

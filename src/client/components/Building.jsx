@@ -1,28 +1,45 @@
 import React, { useState } from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { fadeIn, fadeOut, rotateOut } from '../../trndgine/client/animations'
+import { fadeOut, fadeIn, leaveBottomRight, enterBottomLeft, rotateIn, rotateOut } from '../../trndgine/client/animations'
 import buildingsInfos from '../../core/cardsInfos/buildings.json'
 
-export const Building = ({name, age, css, globalKey, onClick}) => {
+export const Building = ({building, age, css, globalKey, onClick, justFlipped}) => {
 
-    const faceDown = !name || name === 'faceDown'
+    const isEmptySlot = building === null
+    const name = building?.name
+    const isUnknown = !name
+    const isGuild = building?.isGuild
+    
+    const frontName =   isEmptySlot ? 'empty'   :
+                        isUnknown   ? 'unknown' :
+                        name
 
-    const url = faceDown
-        ? require(`../assets/ages/age${age || 1}.jpg`).default
-        : require(`../assets/buildings/${name || 'academy'}.jpg`).default
+    const backName =    isEmptySlot ? 'empty' :
+                        isGuild ? 'back-guild' :
+                        age ? `back-${age}` : 'empty'
+
+    const [frontImage, backImage] = [frontName, backName].map(n => require(`../assets/buildings/${n}.jpg`).default)
+    const isFaceDown = building?.faceDown || isUnknown
 
     const style = {
         ...css,
-        visibility: name ? 'visible' : 'hidden'
     }
 
-    const color = faceDown ? null : buildingsInfos.filter(i => i.name===name)[0].color
+    if(isEmptySlot) {
+        return <img className={`card building hidden`} src={frontImage} draggable="false" style={style} />
+    }
 
-    return <Flipped flipId={faceDown ? ('faceDown'+globalKey) : name} onAppear={fadeIn} >
-            {faceDown
-                ? <img className={`card building notplayable`} src={url} draggable="false" style={style} />
-                : <img className={`card building playable ${color}`} src={url} draggable="false" style={style} onClick={onClick} />
-            }
+    const flipId = isUnknown ? 'unknown'+age+globalKey : name
+    const enterAnimation = fadeIn // TODO : should be enterBottomLeft if just flipped, fadeIn otherwise
+    const exitAnimation = null // TODO : should be rotateOut but setting any exit animation seems to buggy
+    const color = isGuild ? 'purple' : buildingsInfos.filter(b => b.name===name)?.[0]?.color
+    const playable = !isUnknown && !isFaceDown
+
+    return <Flipped flipId={flipId} onAppear={enterAnimation} onExit={exitAnimation} style={{perspective: "600px"}} transformOrigin="center" >
+                <div className={`card3DContainer card building ${color} ${playable ? 'playable' : 'notplayable'}`} onClick={playable ? onClick : null} >
+                    <img className="front" src={isFaceDown ? backImage : frontImage} draggable="false" style={style} />
+                    <img className="back" src={isFaceDown ? frontImage : backImage} draggable="false" style={style}  />
+                </div>
             </Flipped>
 
 }

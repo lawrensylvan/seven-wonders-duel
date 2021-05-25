@@ -37,12 +37,12 @@ export const Lobby = () => {
                         </span>
 
                         {!isMine &&
-                            <button onClick={()=>dispatch(actions.joinTable(t.id))}>
+                            <button onClick={()=>dispatch(actions.joinTable(t.id))} autoFocus>
                                 Join
                             </button>
                         }
                         {isMine && waiting4Ready && !iAmReady && 
-                            <button onClick={()=>dispatch(actions.readyToPlay(t.id))}>
+                            <button onClick={()=>dispatch(actions.readyToPlay(t.id))} autoFocus>
                                 Ready to play !
                             </button>
                         }

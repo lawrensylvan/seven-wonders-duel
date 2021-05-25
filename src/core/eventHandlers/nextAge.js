@@ -4,19 +4,19 @@ import allBuildings from '../cardsInfos/buildings.json'
 // 1 = visible card, 0 = face down card, null = gap
 const pyramidStructure = {
     1: [
-        [1,1,1,1,1,1],
-         [0,0,0,0,0],
-          [1,1,1,1],
-           [0,0,0],
-            [1,1]
-    ],
-    
-    2: [
             [1,1],
            [0,0,0],
           [1,1,1,1],
          [0,0,0,0,0],
         [1,1,1,1,1,1],
+    ]
+    ,
+    2: [
+        [1,1,1,1,1,1],
+         [0,0,0,0,0],
+          [1,1,1,1],
+           [0,0,0],
+            [1,1]
     ],
 
     3: [
@@ -45,8 +45,8 @@ export const nextAge = (state) => {
     // fill pyramid according to structure (null stands for empty spaces in pyramid between cards)
     state.pyramid = pyramidStructure[state.age].map(stage => stage.map(code => {
         switch (code) {
-            case 1: return {building: ageBuildings.pop().name}
-            case 0: return {building: ageBuildings.pop().name, faceDown: true}
+            case 1: return {name: ageBuildings.pop().name}
+            case 0: return {name: ageBuildings.pop().name, isFaceDown: true}
             case null: return null
         }}))
 
