@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { Flipped } from 'react-flip-toolkit'
 
 export const MilitaryBoard = ({militaryPosition, children}) => {
 
@@ -7,19 +8,24 @@ export const MilitaryBoard = ({militaryPosition, children}) => {
     const pawn_url = require(`../assets/militaryBoard/conflictPawn-v.png`).default
 
     const dispatch = useDispatch()
-    
+
+    /* To debug conflict pawn position :
+    <div className="conflictPawnContainer">
+        {[...Array(19).keys()].map(i => <img className="conflictPawn" src={pawn_url} draggable="false" style={{gridColumn: `${i}/${i+1}`}} />)}
+    </div>
+    */
+
     return <div id="board">
 
         <img className="militaryBoard" height={200} src={board_url} draggable="false" />
 
-        <img className="conflictPawn" src={pawn_url} draggable="false"
-            onClick={()=>dispatch({type:'debug/advanceMilitary'})}
-            style={{
-            position: 'absolute',
-            top: '40%',
-            width: '4%',
-            left: `calc( 44.5% + ${militaryPosition}*4.3%)`
-        }} />
+        <div className="conflictPawnContainer">
+            <Flipped flipId="conflictPawn">
+                <img className="conflictPawn" src={pawn_url} draggable="false"
+                    style={{gridColumn: `${militaryPosition + 10}/${militaryPosition + 10 + 1}`}} />
+            </Flipped>
+        </div>
+        
 
         {children.map((child, index) => React.cloneElement(child, { css: {
             position: 'absolute',

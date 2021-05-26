@@ -51,7 +51,6 @@ export const Board = ({state, player}) => {
         animateFlippedElements();
         animateEnteringElements();
       };
-
     return (
         <Flipper flipKey={state} handleEnterUpdateDelete={flipThenExitThenEnter} >
             <div id="all">
@@ -61,9 +60,9 @@ export const Board = ({state, player}) => {
 
                     </div>
                 }
-
+                
                 {state.progressTokens &&
-                    <MilitaryBoard militaryPosition={state.militaryPosition} >
+                    <MilitaryBoard militaryPosition={state.militaryPosition * (playerId ? -1 : 1)} >
                         {state.progressTokens.map((token,i) => <ProgressToken name={token} key={i} />)}
                     </MilitaryBoard>
                 }

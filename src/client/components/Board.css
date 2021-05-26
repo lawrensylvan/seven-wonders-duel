@@ -159,19 +159,26 @@ body {
     grid-area: board;
     justify-self: center;
     align-self: start;
-    position: relative;	
+    position: relative;
 }
 
 .militaryBoard {
-  position:relative;
+  position: relative;
+}
+
+.conflictPawnContainer {
+  display: grid;
+  grid-auto-flow: column;
+	grid-template-columns: repeat(19, 30px);
+  grid-column-gap: 3.85px;
+  position: absolute;
+  top: 78px;
+  left: 36px;
 }
 
 .conflictPawn {
-  position:absolute;
-  top: 37.25%;
-  width: 4.2%;
-  left: calc( (50% - 0.9%) + 0*4.8%);
-  /*transition: 0.5s ease-in-out;*/
+  width: 28px;
+  z-index: 2;
 }
 
 /*****************************/

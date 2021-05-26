@@ -20,8 +20,6 @@ export const Coins = ({amount, css}) => {
         rest = rest % availableChanges[i]
     }
 
-    console.dir(result)
-
     const items = result.flatMap((amount, i) => Array(amount).fill(i))
 
     const [rotation] = useState(Math.round((Math.random() - 0.5) * 40))
