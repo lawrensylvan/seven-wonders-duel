@@ -4,8 +4,9 @@ import { nextAge, applyBuildingEffects, flipPyramidBuildings } from '../events'
 
 export const buyBuilding = (state, player, {building}) => {
 
-    // TODO : check if it's player turn
-
+    // check if it's player turn
+    if(state.toPlay !== player) throw 'It is not your turn'
+    
     // check that the building is indeed in the pyramid
     const targetStage = state.pyramid.filter(stage => stage.some(b => b?.name === building))?.[0]
     if(!targetStage) throw `The building ${building} is not in the pyramid`
@@ -30,10 +31,12 @@ export const buyBuilding = (state, player, {building}) => {
     const id = state.players.indexOf(player)
     state.cities[id].buildings.push({name: building})
 
-    // TODO : replace the following by this :
+
+    // apply building's immediate and permanent effects, then unhide the pyramid cards that were revealed
     let nextEvents = [
-        //applyBuildingEffects(player, building),
+        applyBuildingEffects(player, building),
         flipPyramidBuildings(targetStage, buildingIndex)
+        // TODO : next turn
     ]
     if(!state.pyramid.some(stage => stage.some(b => b))) {
         nextEvents.push(nextAge())

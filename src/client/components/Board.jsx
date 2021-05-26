@@ -8,6 +8,7 @@ import { MilitaryBoard } from './MilitaryBoard'
 import { ProgressToken } from './ProgressToken'
 import { Building } from './Building'
 import { Wonder } from './Wonder'
+import { Coins } from './Coins'
 
 export const Board = ({state, player}) => {
 
@@ -91,6 +92,10 @@ export const Board = ({state, player}) => {
                 }
 
                 {state.cities?.[playerId] &&
+                <>
+                    <div className="coins">
+                        <Coins amount={state.cities[playerId].coins} />
+                    </div>
                     <div id="city1">
                         <div className="wonderContainer">
                             {state.cities[playerId].wonders.map((wonder, i) => <Wonder name={wonder} key={i} />)}
@@ -98,7 +103,10 @@ export const Board = ({state, player}) => {
                         <div className="buildingContainer">
                             {state.cities[playerId].buildings.map((building, i) => <Building building={building} key={i} />)}
                         </div>
+                        
+                        
                     </div>
+                </>
                 }
                 {state.cities?.[playerId ? 0 : 1] &&
                     <div id="city2">

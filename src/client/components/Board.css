@@ -44,9 +44,9 @@ body {
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
   grid-template-areas: 
-    "board board board"
+    "coins board board"
     "city1 pyramid city2"
-    "infos infos infos";
+    "city1 pyramid city2";
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   justify-items: center;
@@ -232,6 +232,7 @@ body {
   grid-area: city1;
   justify-self: start;
   align-self: center;
+  display: block;
 }
 
 #city2 {
@@ -275,7 +276,7 @@ body {
 }
 
 .buildingContainer .building {
-  margin-bottom: -100px;
+  margin-bottom: -106px;
 }
 
 .brown  { grid-column: 1/2; }
@@ -285,6 +286,24 @@ body {
 .red    { grid-column: 5/6; }
 .green  { grid-column: 6/7; }
 .purple { grid-column: 7/8; }
+
+.coins {
+  grid-area: coins;
+  justify-self: start;
+  align-self: center;
+}
+
+.coin1 {
+  width: 54px;
+}
+
+.coin3 {
+  width: 67px;
+}
+
+.coin6 {
+  width: 82px;
+}
 
 /*.deckCard {
 	; 

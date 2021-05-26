@@ -4,6 +4,7 @@ import { buyBuilding } from './moveHandlers/buyBuilding'
 import { nextAge } from './eventHandlers/nextAge'
 import { applyBuildingEffects } from './eventHandlers/applyBuildingEffects'
 import { flipPyramidBuildings } from './eventHandlers/flipPyramidBuildings'
+import { gainMoney } from './eventHandlers/gainMoney'
 import { endGame } from './eventHandlers/endGame'
 
 export const moveHandlers = {
@@ -15,5 +16,6 @@ export const eventHandlers = {
     nextAge,
     applyBuildingEffects,
     flipPyramidBuildings,
-    endGame
+    endGame,
+    gainMoney
 }
