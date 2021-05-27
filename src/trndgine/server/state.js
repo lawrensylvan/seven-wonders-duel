@@ -105,24 +105,28 @@ export const ServerState = () => {
             return game.getGameStatePatch4(player)
         },
 
-        processMove(tableId, player, move) {
+        getMoveProcessor(tableId, player, move) {
             this.checkPlayerExists(player)
             const table = this.getTable(tableId)
             if(!table.players.includes(player)) throw 'This player is not in this game'
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            const nextEvents = game.processMove(player, move)
-            return nextEvents
+            return game.getMoveProcessor(player, move)
         },
 
-        processGameEvent(tableId, event) {
+        getEventProcessor(tableId, event) {
             const table = this.getTable(tableId)
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            const nextEvents = game.processEvent(event)
-            return nextEvents
+            return game.getEventProcessor(event)
+        },
+
+        computePublicStates(tableId) {
+            const table = this.getTable(tableId)
+            const game = this.getGame(tableId)
+            game.computePublicStates()
         }
 
     }

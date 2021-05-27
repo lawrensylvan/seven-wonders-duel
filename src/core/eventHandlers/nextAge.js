@@ -31,27 +31,30 @@ const pyramidStructure = {
     ],
 }
 
-export const nextAge = () => state => {
-    // if end of age 3, end the game
-    if(state.age === 3) return [endGame()]
+export const nextAge = () => {
+    return function * (state) {
+        // if end of age 3, end the game
+        if(state.age === 3) {
+            then.endGame()
+            return
+        }
 
-    // switch to next age
-    state.age = (state.age ?? 0) + 1
+        // switch to next age
+        state.age = (state.age ?? 0) + 1
 
-    // shuffle age deck of building
-    let ageBuildings = _.shuffle(allBuildings.filter(b => b.age === state.age))
+        // shuffle age deck of building
+        let ageBuildings = _.shuffle(allBuildings.filter(b => b.age === state.age))
 
-    // TODO : if age 3, pick 3 guilds out of 7
-    
-    // fill pyramid according to structure (null stands for empty spaces in pyramid between cards)
-    state.pyramid = pyramidStructure[state.age].map(stage => stage.map(code => {
-        switch (code) {
-            case 1: return {name: ageBuildings.pop().name}
-            case 0: return {name: ageBuildings.pop().name, isFaceDown: true}
-            case null: return null
-        }}))
+        // TODO : if age 3, pick 3 guilds out of 7
+        
+        // fill pyramid according to structure (null stands for empty spaces in pyramid between cards)
+        state.pyramid = pyramidStructure[state.age].map(stage => stage.map(code => {
+            switch (code) {
+                case 1: return {name: ageBuildings.pop().name}
+                case 0: return {name: ageBuildings.pop().name, isFaceDown: true}
+                case null: return null
+            }}))
 
-    // TODO determine next player
-
-    return []
+        // TODO determine next player
+    }
 }

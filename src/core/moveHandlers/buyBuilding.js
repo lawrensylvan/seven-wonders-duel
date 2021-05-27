@@ -4,7 +4,7 @@ import { nextAge } from '../eventHandlers/nextAge'
 import { applyBuildingEffects} from '../eventHandlers/applyBuildingEffects'
 import { flipPyramidBuildings } from '../eventHandlers/flipPyramidBuildings'
 
-export const buyBuilding = (state, player, {building}) => {
+export function * buyBuilding (state, player, {building}) {
 
     // check if it's player turn
     if(state.toPlay !== player) throw 'It is not your turn'
@@ -33,16 +33,12 @@ export const buyBuilding = (state, player, {building}) => {
     const id = state.players.indexOf(player)
     state.cities[id].buildings.push({name: building})
 
+    yield applyBuildingEffects(player, building)
 
-    // apply building's immediate and permanent effects, then unhide the pyramid cards that were revealed
-    let nextEvents = [
-        applyBuildingEffects(player, building),
-        flipPyramidBuildings(targetStage, buildingIndex)
-        // TODO : next turn
-    ]
+    yield flipPyramidBuildings(targetStage, buildingIndex)
+    
     if(!state.pyramid.some(stage => stage.some(b => b))) {
-        nextEvents.push(nextAge())
+        yield nextAge()
     }
 
-    return nextEvents
 }

@@ -13,19 +13,19 @@ export const Game = (players, tableId) => {
 
         id: tableId,
 
-        processMove(player, move) {
+        getMoveProcessor(player, move) {
             const handler = moveHandlers[move.type]
             if(!handler) throw 'This move type does not exist'
-            const nextEvents = handler(state, player, move)
-            publicStates = players.map(p => state.getPublicState(p))
-            return nextEvents
+            return handler(state, player, move)
         },
 
-        processEvent(event) {
-            if(!event) throw 'Internal error : this game event does not exist'
-            const nextEvents = event(state)
+        computePublicStates() {
             publicStates = players.map(p => state.getPublicState(p))
-            return nextEvents
+        },
+
+        getEventProcessor(event) {
+            if(!event) throw 'Internal error : this game event does not exist'
+            return event(state)
         },
 
         getGameState4 : (player) => {

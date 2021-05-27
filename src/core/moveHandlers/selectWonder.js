@@ -1,6 +1,6 @@
 import { nextAge } from '../eventHandlers/nextAge'
 
-export const selectWonder = (state, player, {wonder}) => {
+export function * selectWonder(state, player, {wonder}) {
     // check if move is valid
     if(state.toPlay !== player) throw 'It is not your turn'
     if(!state.wondersToSelect.includes(wonder)) throw 'There is no such wonder'
@@ -17,5 +17,7 @@ export const selectWonder = (state, player, {wonder}) => {
     }
 
     // start age 1 phase if all wonders have been claimed
-    return wondersLeft ? [] : [nextAge()]
+    if(!wondersLeft) {
+        yield nextAge()
+    }
 }
