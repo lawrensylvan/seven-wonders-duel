@@ -1,4 +1,4 @@
-import { nextAge } from '../events'
+import { nextAge } from '../eventHandlers/nextAge'
 
 export const selectWonder = (state, player, {wonder}) => {
     // check if move is valid

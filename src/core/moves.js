@@ -1,3 +1,5 @@
+// TODO : use an action creator generator from moveHandlers to reduce copy paste ?
+
 /* Beginning of the game */
 
 export const selectWonder = (wonder) => ({

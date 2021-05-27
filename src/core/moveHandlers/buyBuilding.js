@@ -1,6 +1,8 @@
 import { _ } from 'lodash'
 
-import { nextAge, applyBuildingEffects, flipPyramidBuildings } from '../events'
+import { nextAge } from '../eventHandlers/nextAge'
+import { applyBuildingEffects} from '../eventHandlers/applyBuildingEffects'
+import { flipPyramidBuildings } from '../eventHandlers/flipPyramidBuildings'
 
 export const buyBuilding = (state, player, {building}) => {
 

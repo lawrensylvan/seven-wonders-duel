@@ -1,5 +1,6 @@
 import { _ } from 'lodash' 
 import allBuildings from '../cardsInfos/buildings.json'
+import { endGame } from '../eventHandlers/endGame'
 
 // 1 = visible card, 0 = face down card, null = gap
 const pyramidStructure = {
@@ -30,7 +31,7 @@ const pyramidStructure = {
     ],
 }
 
-export const nextAge = (state) => {
+export const nextAge = () => state => {
     // if end of age 3, end the game
     if(state.age === 3) return [endGame()]
 

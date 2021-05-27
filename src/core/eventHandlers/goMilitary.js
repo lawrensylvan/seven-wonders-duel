@@ -1,5 +1,5 @@
 
-export const goMilitary = (state, {player, amount}) => {
+export const goMilitary = (player, amount) => state => {
     const id = state.players.indexOf(player)
 
     let finalPosition = state.militaryPosition + (id ? -1 : 1) * amount

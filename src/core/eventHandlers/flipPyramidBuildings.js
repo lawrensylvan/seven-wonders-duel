@@ -1,5 +1,5 @@
 
-export const flipPyramidBuildings = (state, {targetStage, buildingIndex}) => {
+export const flipPyramidBuildings = (targetStage, buildingIndex) => state => {
 
     // TODO : bug after taking pyramid[2][0], the pyramid[1][1] is flipped up when it shouldn't
 
