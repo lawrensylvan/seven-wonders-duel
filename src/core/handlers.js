@@ -8,6 +8,8 @@ import { flipPyramidBuildings } from './eventHandlers/flipPyramidBuildings'
 import { gainMoney } from './eventHandlers/gainMoney'
 import { goMilitary } from './eventHandlers/goMilitary'
 
+// TODO : find sth to not have to list them all here
+
 export const moveHandlers = {
     selectWonder,
     buyBuilding

@@ -17,16 +17,13 @@ const delayedActionMiddleware = store => next => {
             setTimeout(() => {
                 next(action)
                 stepsYetToApply--
-            }, 500 + stepsYetToApply * 1000)
+            }, 500 + stepsYetToApply * 1000) // TODO : nicer to wait for render+animation end instead of an arbitrary time
             stepsYetToApply++
             return
         }
         return next(action)
     }
 }
-
-
-
 
 const store = createStore(
     combineReducers(reducers),

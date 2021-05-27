@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { actions } from '../store/actions'
-import { Board} from '../../../client/components/Board'
+import { Board} from '../../../client/components/Board' // TODO : IOC
 
 export const Table = () => {
 

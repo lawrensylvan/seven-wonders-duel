@@ -1,3 +1,5 @@
+// TODO : find a way to not have to duplicate type and params of functions into type and payload of actions
+
 export const nextAge = (age) => ({
     type: 'nextAge',
     age

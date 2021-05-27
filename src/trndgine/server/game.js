@@ -1,7 +1,7 @@
 import { compare } from 'fast-json-patch'
 
-import { moveHandlers, eventHandlers } from '../../core/handlers'
-import { GameState } from '../../core/state'
+import { moveHandlers, eventHandlers } from '../../core/handlers' // TODO : IOC : we should pass the handler as an arg
+import { GameState } from '../../core/state' // TODO : IOC
 
 export const Game = (players, tableId) => {
 

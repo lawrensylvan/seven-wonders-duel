@@ -170,7 +170,7 @@ body {
   display: grid;
   grid-auto-flow: column;
 	grid-template-columns: repeat(19, 30px);
-  grid-column-gap: 3.85px;
+  grid-column-gap: 3.85px; /* TODO : fine tune gap,top,left and conflict pawn width for perfect display */
   position: absolute;
   top: 78px;
   left: 36px;
