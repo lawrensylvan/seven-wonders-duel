@@ -36,6 +36,12 @@ export const App = () => {
                         :   <Redirect to='/login'/>}
             </Route>
 
+            <Route exact path="/table/:id/justStarted">
+                {session.isLoggedIn
+                        ?   <Table justStarted="true" />
+                        :   <Redirect to='/login'/>}
+            </Route>
+
         </Switch>
     </Router>
 )}

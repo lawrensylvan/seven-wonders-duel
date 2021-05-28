@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../store/actions'
 import { Board} from '../../../client/components/Board' // TODO : IOC
 
-export const Table = () => {
-
+export const Table = ({justStarted}) => {
+    
     const id = parseInt(useParams().id) || 0 // in debug mode, no id param so we fake it as 0
     const session = useSelector(state => state.session)
     //const table = useSelector(state => state.tables[id])
@@ -14,9 +14,11 @@ export const Table = () => {
 
     const dispatch = useDispatch()
     
-    // Get the initial/current game state from the server
+    // Get the current game state from the server if the game was already in progress
     useEffect(() => {
-        dispatch(actions.getGameState(id))
+        if(!justStarted) {
+            dispatch(actions.getGameState(id))
+        }
     }, [])
 
     // Consume the game patches one by one with interval

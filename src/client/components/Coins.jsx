@@ -25,7 +25,7 @@ export const Coins = ({amount, css}) => {
     // TODO : find out why rotation does not work with FLIP animations
     const [rotation] = useState(Math.round((Math.random() - 0.5) * 40))
     const style = {
-        transform: `rotate(${rotation}deg)`
+        //transform: `rotate(${rotation}deg)`
     }
 
     return items.map((v, i) =>  <Flipped flipId={i} key={i} onAppear={fadeIn} onExit={fadeOut}  >

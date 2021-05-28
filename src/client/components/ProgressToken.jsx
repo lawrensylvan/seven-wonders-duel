@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { fadeIn, fadeOut } from '../../trndgine/client/animations'
+import { enterTopLeft, fadeOut } from '../../trndgine/client/animations'
 
 export const ProgressToken = ({name, css}) => {
     if(!name) return null
@@ -11,10 +11,10 @@ export const ProgressToken = ({name, css}) => {
 
     const style = {
         ...css,
-        transform: `rotate(${rotation}deg)`
+        //transform: `rotate(${rotation}deg)`
     }
     
-    return <Flipped flipId={name} onExit={fadeOut} onAppear={fadeIn}>
+    return <Flipped flipId={name} onExit={fadeOut} onAppear={enterTopLeft}>
         <img className="progressToken" src={url} width='60px' draggable="false" style={style} />
     </Flipped>
 }

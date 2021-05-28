@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { fadeIn, fadeOut } from '../../trndgine/client/animations'
+import { enterBottomLeft, enterBottomRight, fadeOut } from '../../trndgine/client/animations'
 
-export const Wonder = ({name, css, onClick}) => {
+export const Wonder = ({name, css, onClick, side}) => {
 
     const [rotation] = useState(Math.round((Math.random() - 0.5) * 10))
 
@@ -14,7 +14,7 @@ export const Wonder = ({name, css, onClick}) => {
         visibility: name ? 'visible' : 'hidden'
     }
     
-    return <Flipped flipId={name} onExit={fadeOut} onAppear={fadeIn}>
+    return <Flipped flipId={name} onExit={fadeOut} onAppear={side ? enterBottomRight : enterBottomLeft}>
         <img className="card wonder playable" src={url} draggable="false" style={style} onClick={onClick} />
     </Flipped>
 }

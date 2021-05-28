@@ -70,7 +70,8 @@ export const Board = ({state, player}) => {
                 {state.wondersToSelect && state.wondersToSelect.length > 0 &&
                     <div id="wonderSelection">
                         {state.wondersToSelect.map((wonder, i) => {
-                            return <Wonder name={wonder} key={i} onClick={()=>dispatch(actions.play(1, selectWonder(wonder)))} /> // TODO : table id
+                            return <Wonder name={wonder} key={i} side={i % 2}
+                                           onClick={()=>dispatch(actions.play(1, selectWonder(wonder)))} /> // TODO : table id
                         })}
                     </div>
                 }

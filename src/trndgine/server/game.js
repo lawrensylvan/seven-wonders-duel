@@ -2,6 +2,7 @@ import { compare } from 'fast-json-patch'
 
 import { moveHandlers } from '../../core/handlers' // TODO : IOC : we should pass the handler as an arg
 import { GameState } from '../../core/state' // TODO : IOC
+import { startGame } from '../../core/eventHandlers/startGame'
 
 export const Game = (players, tableId) => {
 
@@ -46,6 +47,10 @@ export const Game = (players, tableId) => {
             cachedPublicStates[player] = publicStates[player]
             return patch
         },
+
+        getFirstGameEvent : () => {
+            return startGame() // TODO : IOC
+        }
 
     }
     

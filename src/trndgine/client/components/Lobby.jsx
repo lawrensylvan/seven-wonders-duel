@@ -47,7 +47,7 @@ export const Lobby = () => {
                             </button>
                         }
                         {isMine && isReady &&
-                            <Redirect to={`/table/${t.id}`} />
+                            <Redirect to={`/table/${t.id}/justStarted`} />
                         }
                         {isMine && inProgress &&
                             <Link to={`/table/${t.id}`}>

@@ -1,8 +1,8 @@
 [
     {
-      "displayName": "piraeus",
+      "name": "piraeus",
       "resourceCondition": ["clay","stone","wood","wood"],
-      "victoryValue": 2,
+      "victoryPoints": 2,
       "production": [["glass", "paper"]],
       "immediateEffects": [
         {"type": "playAgain"}
@@ -10,24 +10,24 @@
     }
     ,
     {
-      "displayName": "pyramids",
+      "name": "pyramids",
       "resourceCondition": ["paper","stone","stone","stone"],
-      "victoryValue": 9
+      "victoryPoints": 9
     }
     ,
     {
-      "displayName": "sphinx",
+      "name": "sphinx",
       "resourceCondition": ["glass","glass","clay","stone"],
-      "victoryValue": 6,
+      "victoryPoints": 6,
       "immediateEffects": [
         {"type": "playAgain"}
       ]
     }
     ,
     {
-      "displayName": "zeus",
+      "name": "zeus",
       "resourceCondition": ["paper","paper","clay","wood","stone"],
-      "victoryValue": 3,
+      "victoryPoints": 3,
       "immediateEffects": [
         {"type": "offerBuildingDestruction", "color": "brown"},
         {"type": "goMilitary", "amount": 1}
@@ -35,9 +35,9 @@
     }
     ,
     {
-      "displayName": "appianway",
+      "name": "appianway",
       "resourceCondition": ["paper","clay","clay","stone","stone"],
-      "victoryValue": 3,
+      "victoryPoints": 3,
       "immediateEffects": [
         {"type": "gainMoney", "amount": 3},
         {"type": "destroyMoney", "amount": 3},
@@ -46,7 +46,7 @@
     }
     ,
     {
-      "displayName": "templeofartemis",
+      "name": "templeofartemis",
       "resourceCondition": ["paper","glass","stone","wood"],
       "immediateEffects": [
         {"type": "gainMoney", "amount": 12},
@@ -55,9 +55,9 @@
     }
     ,
     {
-      "displayName": "circusmaximus",
+      "name": "circusmaximus",
       "resourceCondition": ["glass","wood","stone","stone"],
-      "victoryValue": 3,
+      "victoryPoints": 3,
       "immediateEffects": [
         {"type": "offerBuildingDestruction", "color": "gray"},
         {"type": "goMilitary", "amount": 1}
@@ -65,34 +65,34 @@
     }
     ,
     {
-      "displayName": "colossus",
+      "name": "colossus",
       "resourceCondition": ["glass","clay","clay","clay"],
-      "victoryValue": 3,
+      "victoryPoints": 3,
       "immediateEffects": [
         {"type": "goMilitary", "amount": 2}
       ]
     }
     ,
     {
-      "displayName": "greatlighthouse",
+      "name": "greatlighthouse",
       "resourceCondition": ["paper","paper","stone","wood"],
-      "victoryValue": 4,
+      "victoryPoints": 4,
       "production": [["wood", "stone", "clay"]]
     }
     ,
     {
-      "displayName": "greatlibrary",
+      "name": "greatlibrary",
       "resourceCondition": ["paper","glass","wood","wood","wood"],
-      "victoryValue": 4,
+      "victoryPoints": 4,
       "immediateEffects": [
         {"type": "offerProgressTokenFromTrash", "amount": 1, "amongst": 3}
       ]
     }
     ,
     {
-      "displayName": "hanginggardens",
+      "name": "hanginggardens",
       "resourceCondition": ["paper","glass","wood","wood"],
-      "victoryValue": 3,
+      "victoryPoints": 3,
       "immediateEffects": [
         {"type": "gainMoney", "coins": 6},
         {"type": "playAgain"}
@@ -101,9 +101,9 @@
     }
     ,
     {
-      "displayName": "mausoleum",
+      "name": "mausoleum",
       "resourceCondition": ["paper","glass","glass","clay","clay"],
-      "victoryValue": 2,
+      "victoryPoints": 2,
       "immediateActions": [
           {"type": "offerBuildingFromTrash", "amount": 1, "isFree": false}
       ]

@@ -8,11 +8,11 @@ export const GameState = (players) => {
         toPlay: players[0],
 
         militaryPosition: 0,
-        progressTokens: ['law', 'economy', 'architecture', 'strategy', null],
+        progressTokens: [null, null, null, null, null],
         
         discardPile: [],
 
-        wondersToSelect: ['greatlibrary', 'sphinx', 'mausoleum', 'pyramids'],
+        wondersToSelect: [null, null, null, null],
 
         pyramid: [],
 
@@ -21,13 +21,13 @@ export const GameState = (players) => {
             wonders:            [],
             buildings:          [],
             progressTokens:     [],
-            coins:              7
+            coins:              0
         }, {
             builtWonders:       [],
             wonders:            [],
             buildings:          [],
             progressTokens:     [],
-            coins:              7
+            coins:              0
         }],
 
         getPublicState(player) {

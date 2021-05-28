@@ -31,6 +31,22 @@ export const fadeOut = (el, i, onComplete) => {
     return onComplete
 }
 
+export const enterTopLeft = (el, i) => {
+  const {bottom, left, right} = el.getBoundingClientRect()
+  anime({
+    begin: () => {
+      el.style.opacity = null
+    },
+    targets: el,
+    translateX: left - right,
+    translateY: bottom - window.innerHeight,
+    direction: 'reverse',
+    duration: 750,
+    easing: 'easeOutSine',
+    endDelay: 100 * i,
+  })
+}
+
 export const enterBottomLeft = (el, i) => {
   const {top, left, right} = el.getBoundingClientRect()
   anime({
@@ -41,9 +57,25 @@ export const enterBottomLeft = (el, i) => {
     translateX: left - right,
     translateY: window.innerHeight - top,
     direction: 'reverse',
-    duration: 500,
+    duration: 750,
     easing: 'easeOutSine',
-    endDelay: 75 * i,
+    endDelay: 100 * i,
+  })
+}
+
+export const enterBottomRight = (el, i) => {
+  const {top, left, right} = el.getBoundingClientRect()
+  anime({
+    begin: () => {
+      el.style.opacity = null
+    },
+    targets: el,
+    translateX: right - left,
+    translateY: window.innerHeight - top,
+    direction: 'reverse',
+    duration: 750,
+    easing: 'easeOutSine',
+    endDelay: 100 * i,
   })
 }
 
@@ -55,7 +87,7 @@ export const leaveBottomRight = (el, i, removeElement) => {
     translateY: window.innerHeight - top,
     duration: 500,
     easing: 'easeInSine',
-    delay: 75 * i,
+    delay: 100 * i,
     complete: removeElement,
   })
   return removeElement

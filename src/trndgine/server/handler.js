@@ -72,7 +72,9 @@ export const ActionHandler = (io) => {
             io.to('lobby').emit('action', {type:'tableUpdated', table:state.getTable(tableId)})
             if(state.getTable(tableId).status === 'READY_TO_START') {
                 state.startGame(tableId)
-                io.in(`table/${tableId}`).emit('action', {type:'gameStarted', tableId})
+                const gameState = state.getGameState4(player, tableId)
+                io.in(`table/${tableId}`).emit('action', {type:'gameStarted', tableId, state:gameState})
+                processGameEvent(tableId, state.getFirstGameEvent(tableId))
             }
         },
 

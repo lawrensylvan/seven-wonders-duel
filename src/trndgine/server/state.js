@@ -83,8 +83,16 @@ export const ServerState = () => {
 
         startGame(tableId) {
             const table = this.getTable(tableId)
-            games.push(Game(this.getPlayers(tableId), tableId))
+            const game = Game(this.getPlayers(tableId), tableId)
+            games.push(game)
             table.start()
+        },
+
+        getFirstGameEvent(tableId) {
+            const table = this.getTable(tableId)
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            const game = this.getGame(tableId)
+            return game.getFirstGameEvent()
         },
 
         getGameState4(player, tableId) {
