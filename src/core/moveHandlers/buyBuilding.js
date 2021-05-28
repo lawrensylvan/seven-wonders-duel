@@ -3,6 +3,7 @@ import { _ } from 'lodash'
 import { nextAge } from '../eventHandlers/nextAge'
 import { applyBuildingEffects} from '../eventHandlers/applyBuildingEffects'
 import { flipPyramidBuildings } from '../eventHandlers/flipPyramidBuildings'
+import allBuildings from '../cardsInfos/buildings.json'
 
 export function * buyBuilding (state, player, {building}) {
 
@@ -24,14 +25,33 @@ export function * buyBuilding (state, player, {building}) {
         if(bottomCards.length) throw `The building ${building} is not accessible from the pyramid`
     }
 
-    // TODO : check resource requirements
+    const buildingInfo = allBuildings.filter(b => b.name === building)[0]
+    const playerId = state.players.indexOf(player)
+    
+    // check resource requirements
+    if(buildingInfo.requirements) {
+        let requirements = buildingInfo.requirements
+        let production = state.cities[playerId].buildings.flatMap(b => allBuildings.filter(c => c.name === b.name)[0].production) // TODO : also count wonder's production
+        for(const requirement of requirements) {
+            if(production.includes(requirement)) {
+                _.remove(production, p => p === requirement)    // TODO : handle double productions such as clay OR wood
+            } else {
+                throw `You don't have enough ${requirement} to buy the ${building}`
+            }
+        }
+    }
 
-    // TODO : check price and pay
+    // check price and pay
+    const price = buildingInfo.price ?? 0
+    if(price > state.cities[playerId].coins) {
+        throw `You don't have enough coin to buy the ${building}`
+    }
+    state.cities[playerId].coins -= price
+
 
     // move building from pyramid to player
     state.pyramid[state.pyramid.indexOf(targetStage)][buildingIndex] = null
-    const id = state.players.indexOf(player)
-    state.cities[id].buildings.push({name: building})
+    state.cities[playerId].buildings.push({name: building})
 
     yield applyBuildingEffects(player, building)
 
