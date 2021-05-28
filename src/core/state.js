@@ -5,7 +5,7 @@ export const GameState = (players) => {
     return {
 
         players: players,
-        toPlay: players[0],
+        toPlay: 0,
 
         militaryPosition: 0,
         progressTokens: [null, null, null, null, null],

@@ -17,7 +17,7 @@ const delayedActionMiddleware = store => next => {
             setTimeout(() => {
                 next(action)
                 stepsYetToApply--
-            }, 500 + stepsYetToApply * 1500) // TODO : nicer to wait for render+animation end instead of an arbitrary time
+            }, 500 + stepsYetToApply * 1100) // TODO : nicer to wait for render+animation end instead of an arbitrary time
             stepsYetToApply++
             return
         }
