@@ -61,9 +61,9 @@ export const Board = ({state, player}) => {
                     </div>
                 }
                 
-                {state.progressTokens &&
-                    <MilitaryBoard militaryPosition={state.militaryPosition * (playerId ? -1 : 1)} >
-                        {state.progressTokens.map((token,i) => <ProgressToken name={token} key={i} />)}
+                {state.militaryBoard &&
+                    <MilitaryBoard militaryPosition={state.militaryBoard.conflictPawnPosition * (playerId ? -1 : 1)} >
+                        {state.militaryBoard.progressTokens.map((token,i) => <ProgressToken name={token} key={i} />)}
                     </MilitaryBoard>
                 }
 

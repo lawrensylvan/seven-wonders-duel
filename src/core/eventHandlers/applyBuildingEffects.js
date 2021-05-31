@@ -1,14 +1,12 @@
-import { _ } from 'lodash' 
-import allBuildings from '../cardsInfos/buildings.json'
 import { eventHandlers } from '../handlers'
 
 export const applyBuildingEffects = (player, building) => {
     return function * (state) {
-        const {immediateEffects, permanentEffects} = allBuildings.filter(b => b.name === building)[0]
-
-        // TODO : add building permanent effects to player special powers
+        
+        const {immediateEffects, permanentEffects} = state.buildingInfosOn(building)
+        
         if(permanentEffects) {
-            
+            // TODO : add building permanent effects to player special powers
         }
 
         // apply building immediate effects

@@ -12,6 +12,6 @@ export const startGame = () => {
         for(const player of state.players) {
             yield gainMoney(player, 7)
         }
-
+        
     }
 }
