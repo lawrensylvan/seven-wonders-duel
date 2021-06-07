@@ -113,14 +113,14 @@ export const ServerState = () => {
             return game.getGameStatePatch4(player)
         },
 
-        getMoveProcessor(tableId, player, move) {
+        getExpectedMove(tableId, player, move) {
             this.checkPlayerExists(player)
             const table = this.getTable(tableId)
             if(!table.players.includes(player)) throw 'This player is not in this game'
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            return game.getMoveProcessor(player, move)
+            return game.getExpectedMove()
         },
 
         getEventProcessor(tableId, event) {
@@ -129,6 +129,14 @@ export const ServerState = () => {
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
             return game.getEventProcessor(event)
+        },
+
+        setExpectedMove(tableId, player, types, eventProcessor) {
+            const table = this.getTable(tableId)
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            if(table.isOver()) throw 'The game is over'
+            const game = this.getGame(tableId)
+            game.setExpectedMove(player, types, eventProcessor)
         },
 
         computePublicStates(tableId) {

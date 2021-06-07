@@ -9,15 +9,20 @@ export const Game = (players, tableId) => {
     const state = GameState(players)
     let publicStates = {}
     let cachedPublicStates = {}
+    let expectedMove = {}
 
     return {
 
         id: tableId,
 
-        getMoveProcessor(player, move) {
-            const handler = moveHandlers[move.type]
-            if(!handler) throw 'This move type does not exist'
-            return handler(state, player, move)
+        getExpectedMove() {
+            return expectedMove
+        },
+
+        setExpectedMove(player, allowedActions, eventProcessor) {
+            expectedMove = {
+                player, allowedActions, eventProcessor
+            }
         },
 
         computePublicStates() {

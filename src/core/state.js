@@ -125,6 +125,10 @@ export const GameState = (players) => {
             return [...buildingsProduction, ...wondersProduction]
         },
 
+        pyramidIsEmpty() {
+            return this.pyramid.every(stage => stage.filter(b => b).length === 0)
+        },
+
         getPublicState(player) {
             let publicState = JSON.parse(JSON.stringify(this))
             

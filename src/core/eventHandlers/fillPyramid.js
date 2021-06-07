@@ -31,16 +31,8 @@ const pyramidStructure = {
     ],
 }
 
-export const nextAge = () => {
+export const fillPyramid = () => {
     return function * (state) {
-
-        // if end of age 3, end the game
-        if(state.age === 3) {
-            yield endGame()
-        }
-
-        // switch to next age
-        state.age = (state.age ?? 0) + 1
 
         // shuffle age deck of building
         let ageBuildings = state.buildingDeck.filter(b => state.buildingInfosOn(b).age === state.age)
@@ -56,7 +48,5 @@ export const nextAge = () => {
             else return {name, isFaceDown: true}
         }))
 
-        // TODO determine next player
-        
     }
 }
