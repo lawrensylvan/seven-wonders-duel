@@ -1,0 +1,44 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": "plugin:react/recommended",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "unused-imports"
+    ],
+    "rules": {
+        "no-unused-vars": 0,
+        "unused-imports/no-unused-imports": 2,
+        "unused-imports/no-unused-vars": [
+        1,
+        {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+        }
+        ],
+        "react/no-did-mount-set-state": 2,
+        "react/no-direct-mutation-state": 2,
+        "react/jsx-uses-vars": 2,
+        "no-undef": 2,
+        "semi": 0,
+        "react/prop-types": 0,
+        "react/jsx-no-bind": 1,
+        "react/jsx-no-duplicate-props": 2
+    }
+}

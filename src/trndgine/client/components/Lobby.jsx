@@ -37,7 +37,7 @@ export const Lobby = () => {
                         </span>
 
                         {!isMine &&
-                            <button onClick={()=>dispatch(actions.joinTable(t.id))} autoFocus>
+                            <button onClick={()=>notFull ? dispatch(actions.joinTable(t.id)) : null} autoFocus>
                                 Join
                             </button>
                         }

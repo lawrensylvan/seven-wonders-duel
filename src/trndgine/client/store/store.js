@@ -30,7 +30,7 @@ const store = createStore(
     composeWithDevTools(
         applyMiddleware(
             createSocketIOMiddleware(io, 'server/'), // actions beginning with 'server/' will be sent to server as 'action' messages
-            delayedActionMiddleware                 // 1,5 second interval between firing of each redux action
+            delayedActionMiddleware                 // 1,1 second interval between firing of each redux action
             )
         )
 )

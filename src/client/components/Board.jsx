@@ -1,14 +1,17 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { Flipper } from 'react-flip-toolkit'
+import { useDispatch } from 'react-redux'
+
 import { actions } from '../../trndgine/client/store/actions'
-import { selectWonder, buyBuilding } from '../../core/moves'
-import './Board.css'
-import { MilitaryBoard } from './MilitaryBoard'
+import { pickWonder, buyBuilding } from '../../core/moves'
+
 import { ProgressToken } from './ProgressToken'
+import { MilitaryBoard } from './MilitaryBoard'
 import { Building } from './Building'
 import { Wonder } from './Wonder'
 import { Coins } from './Coins'
+
+import './Board.css'
 
 export const Board = ({state, player}) => {
 
@@ -62,7 +65,7 @@ export const Board = ({state, player}) => {
                 }
                 
                 {state.militaryBoard &&
-                    <MilitaryBoard militaryPosition={state.militaryBoard.conflictPawnPosition * (playerId ? -1 : 1)} >
+                    <MilitaryBoard conflictPawnPosition={state.militaryBoard.conflictPawnPosition * (playerId ? -1 : 1)} >
                         {state.militaryBoard.progressTokens.map((token,i) => <ProgressToken name={token} key={i} />)}
                     </MilitaryBoard>
                 }
@@ -71,7 +74,7 @@ export const Board = ({state, player}) => {
                     <div id="wonderSelection">
                         {state.wondersToSelect.map((wonder, i) => {
                             return <Wonder name={wonder} key={i} side={i % 2}
-                                           onClick={()=>dispatch(actions.play(1, selectWonder(wonder)))} /> // TODO : table id
+                                           onClick={()=>dispatch(actions.play(1, pickWonder(wonder)))} /> // TODO : table id
                         })}
                     </div>
                 }

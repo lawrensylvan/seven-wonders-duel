@@ -1,13 +1,10 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { Flipped } from 'react-flip-toolkit'
 
 export const MilitaryBoard = ({militaryPosition, children}) => {
 
     const board_url = require(`../assets/militaryBoard/board-h.png`).default
     const pawn_url = require(`../assets/militaryBoard/conflictPawn-v.png`).default
-
-    const dispatch = useDispatch()
 
     /* To debug conflict pawn position :
     <div className="conflictPawnContainer">
@@ -26,7 +23,6 @@ export const MilitaryBoard = ({militaryPosition, children}) => {
             </Flipped>
         </div>
         
-
         {children.map((child, index) => React.cloneElement(child, { css: {
             position: 'absolute',
             left: 179 + index * 70,

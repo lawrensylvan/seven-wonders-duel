@@ -1,6 +1,5 @@
 import { compare } from 'fast-json-patch'
 
-import { moveHandlers } from '../../core/handlers' // TODO : IOC : we should pass the handler as an arg
 import { GameState } from '../../core/state' // TODO : IOC
 import { startGame } from '../../core/eventHandlers/startGame'
 
@@ -19,9 +18,9 @@ export const Game = (players, tableId) => {
             return expectedMove
         },
 
-        setExpectedMove(player, allowedActions, eventProcessor) {
+        setExpectedMove(player, moveHandlers, eventProcessor) {
             expectedMove = {
-                player, allowedActions, eventProcessor
+                player, moveHandlers, eventProcessor
             }
         },
 

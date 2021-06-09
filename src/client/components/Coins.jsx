@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Flipped } from 'react-flip-toolkit'
+
 import { fadeIn, fadeOut } from '../../trndgine/client/animations'
 
-export const Coins = ({amount, css}) => {
+export const Coins = ({amount}) => {
     
-    const coin1 = require('../assets/coins/coin-1.png').default
-    const coin3 = require('../assets/coins/coin-3.png').default
-    const coin6 = require('../assets/coins/coin-6.png').default
-
     const availableChanges = [6, 3, 1]
     const urls = availableChanges.map(amount => require(`../assets/coins/coin-${amount}.png`).default)
 
@@ -22,14 +19,8 @@ export const Coins = ({amount, css}) => {
 
     const items = result.flatMap((amount, i) => Array(amount).fill(i))
 
-    // TODO : find out why rotation does not work with FLIP animations
-    const [rotation] = useState(Math.round((Math.random() - 0.5) * 40))
-    const style = {
-        //transform: `rotate(${rotation}deg)`
-    }
-
     return items.map((v, i) =>  <Flipped flipId={i} key={i} onAppear={fadeIn} onExit={fadeOut}  >
-                                    <img className={`coin${availableChanges[v]}`} src={urls[v]}  style={style} draggable="false" />
+                                    <img className={`coin${availableChanges[v]}`} src={urls[v]} draggable="false" />
                                 </Flipped>)
 
 }

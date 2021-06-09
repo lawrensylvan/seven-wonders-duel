@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Flipped } from 'react-flip-toolkit'
-import { fadeOut, fadeIn, leaveBottomRight, enterBottomLeft, rotateIn, rotateOut } from '../../trndgine/client/animations'
-import buildingsInfos from '../../core/cardsInfos/buildings.json'
 
-export const Building = ({building, age, css, globalKey, onClick, justFlipped}) => {
+import buildingsInfos from '../../core/cardsInfos/buildings.json'
+import { fadeIn } from '../../trndgine/client/animations'
+
+export const Building = ({building, age, css, globalKey, onClick}) => {
 
     const isEmptySlot = building === null
     const name = building?.name

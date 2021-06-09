@@ -1,7 +1,7 @@
 
-export const expect = (player, allowedActions) => {
+export const expect = (player, ...moveHandlers) => {
     return {
         player: player,
-        allowedActions: allowedActions
+        moveHandlers: moveHandlers
     }
 }

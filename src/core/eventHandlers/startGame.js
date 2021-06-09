@@ -1,10 +1,13 @@
 import { drawProgressTokens } from './drawProgressTokens'
 import { drawWonders } from './drawWonders'
 import { gainMoney } from './gainMoney'
-import { gainWonder } from './gainWonder'
 import { fillPyramid } from './fillPyramid'
-import { buyBuilding } from './buyBuilding'
 import { swapTurns } from './swapTurns'
+import { endGame } from './endGame'
+
+import { pickWonder } from '../moveHandlers/pickWonder'
+import { buyBuilding } from '../moveHandlers/buyBuilding'
+
 import { expect } from '../../trndgine/server/expect'
 
 export const startGame = () => {
@@ -12,23 +15,22 @@ export const startGame = () => {
         
         yield drawProgressTokens(5)
 
-        /*yield drawWonders(4)
+        yield drawWonders(4)
         for(let who of [0, 1, 1, 0]) {
             const player = state.players[who]
-            const {wonder} = yield expect(player, ['selectWonder'])
-            yield gainWonder(player, wonder)
+            yield expect(player, pickWonder)
         }
         
         yield drawWonders(4)
         for(let who of [1, 0, 0, 1]) {
             const player = state.players[who]
-            const {wonder} = yield expect(player, ['selectWonder'])
-            yield gainWonder(player, wonder)
-        }*/
+            yield expect(player, pickWonder)
+        }
 
         for(const player of state.players) {
             yield gainMoney(player, 7)
         }
+        // TODO : try ‘yield‘ on its own here instead of yield gainMoney twice
 
         for(let age of [1, 2, 3]) {
             state.age = age
@@ -37,13 +39,13 @@ export const startGame = () => {
             while(!state.pyramidIsEmpty()) {
                 const player = state.players[state.toPlay]
                 
-                yield expect(player, [buyBuilding])
+                yield expect(player, buyBuilding, pickWonder) // TODO : pickWonder just for testing multiple possible actions
                 
                 yield swapTurns()
             }
         }
 
-        yield determineWinner()
+        yield endGame()
         
     }
 }

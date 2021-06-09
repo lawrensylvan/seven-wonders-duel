@@ -61,22 +61,6 @@ const games = (games = [], action) => {
                 steps: [...g.steps, patch]
             } : g)
         
-        /*case 'gameStatePatched':
-            return games.map(g => g.tableId===tableId ? {
-                ...g,
-                state: g.state,
-                steps: [...g.steps, patch]
-            } : g)
-
-        case 'consumePatch':
-            //const newState = applyPatch(games[0].state, games[0].steps[0], true, false).newDocument
-            //const newSteps = games[0].steps.slice(1)
-            return games.map(g => g.tableId===tableId ? {
-                ...g,
-                state: applyPatch(g.state, g.steps[0], true, false).newDocument,
-                steps: g.steps.slice(1)
-            } : g)*/
-        
         default:
             return games
     }

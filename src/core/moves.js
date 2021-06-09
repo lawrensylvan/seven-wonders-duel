@@ -2,8 +2,8 @@
 
 /* Beginning of the game */
 
-export const selectWonder = (wonder) => ({
-    type: 'selectWonder',
+export const pickWonder = (wonder) => ({
+    type: 'pickWonder',
     wonder
 })
 
@@ -28,25 +28,25 @@ const buildWonder = (wonder, building) => ({
 /* Effects of specific wonders */
 
 // zeus
-const selectBrownBuildingToDestroy = (building) => ({
+const pickBrownBuildingToDestroy = (building) => ({
     type: 'selectBrownBuildingToDestroy',
     building
 })
 
 // circus maximus
-const selectGrayBuildingToDestroy = (building) => ({
+const pickGrayBuildingToDestroy = (building) => ({
     type: 'selectGrayBuildingToDestroy',
     building
 })
 
 // great library
-const selectProgressToken = (progressToken) => ({
+const pickProgressToken = (progressToken) => ({
     type: 'selectProgressToken',
     progressToken
 })
 
 // mausoleum
-const selectBuildingFromTrash = (building) => ({
+const pickBuildingFromTrash = (building) => ({
     type: 'selectBuildingFromTrash',
-    progressToken
+    building
 })

@@ -1,4 +1,3 @@
-import {v4 as uuid} from 'uuid'
 import { ServerState } from './state'
 
 const state = ServerState()
@@ -10,8 +9,10 @@ export const ActionHandler = (io) => {
         const eventProcessor = alreadyStarted ? event : state.getEventProcessor(tableId, event)
         let moreEvents = false
         do {
+            // launch the generator to unfold that game event until its next step
             const {value, done} = eventProcessor.next()
             moreEvents = !done
+            // send the state updates to the clients if any
             state.computePublicStates(tableId)
             state.getPlayers(tableId).forEach(player => {
                 const patch = state.getGameStatePatch4(player, tableId)
@@ -19,19 +20,20 @@ export const ActionHandler = (io) => {
                     io.to(player).emit('action', {type:'gameStatePatched', tableId, patch})
                 }
             })
+            // if the next step is another game event generator
             if(typeof value === 'function') {
-                // If the generator yields another generator, we should process that game event
+                // we should process that game event
                 processGameEvent(tableId, value)
             }
+            // if the generator yields an object created by the special 'expect' action creator
             if(value !== null && typeof value === 'object') {
-                // If the generator yields an object created by the special 'expect' action creator
-                const {player, allowedActions} = value
-                // register the generator 
-                state.setExpectedMove(tableId, player, allowedActions, eventProcessor)
+                const {player, moveHandlers} = value
+                // we should register that a move of that type(s) from that player is now allowed
+                state.setExpectedMove(tableId, player, moveHandlers, eventProcessor)
                 moreEvents = false
             }
             
-        } while(moreEvents)
+        } while(moreEvents) // loop over all steps of generators
     }
     
     // Set of exposed functions for processing actions requested by the clients (socket)
@@ -96,13 +98,16 @@ export const ActionHandler = (io) => {
         },
 
         move: ({tableId, move}, socket) => {
+            // will compare the received move.type with the allowed expected moves
             const player = state.getPlayerBySocket(socket.id)
-            const expectedMove = state.getExpectedMove(tableId, player, move)
-            if(!expectedMove) throw 'The game is still processing events'
-            const {player: expectedPlayer, types, eventProcessor} = expectedMove
+            const expectedMove = state.getExpectedMove(tableId, move)
+            if(!expectedMove) throw 'The game is still processing events and not allowing any player move'
+            const {player: expectedPlayer, moveHandlers, eventProcessor} = expectedMove
             if(expectedPlayer != player) throw 'It is not your turn'
 
-            const moveProcessor = expectedMove.allowedActions.filter(f => f.name === move.type)?.[0]
+            // if a move of that type was expected at this moment for this player, go ahead
+
+            const moveProcessor = moveHandlers.filter(f => f.name === move.type)?.[0]
             if(!moveProcessor) throw 'You cannot perform this action'
 
             let moreEvents = false
@@ -124,8 +129,8 @@ export const ActionHandler = (io) => {
                 }
                 else if(value !== null && typeof value === 'object') {
                     // If the generator yields an object created by the special 'expect' action creator
-                    const {player, allowedActions} = value
-                    state.setExpectedMove(tableId, player, allowedActions, eventProcessor)
+                    const {player, moveHandlers} = value
+                    state.setExpectedMove(tableId, player, moveHandlers, eventProcessor)
                     moreEvents = false
                 }
             } while(moreEvents)
@@ -136,7 +141,7 @@ export const ActionHandler = (io) => {
         },
 
         resign: ({tableId}, socket) => {
-            // todo
+            // TODO
         }
 
     }

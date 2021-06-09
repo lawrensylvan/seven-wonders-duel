@@ -113,10 +113,8 @@ export const ServerState = () => {
             return game.getGameStatePatch4(player)
         },
 
-        getExpectedMove(tableId, player, move) {
-            this.checkPlayerExists(player)
+        getExpectedMove(tableId) {
             const table = this.getTable(tableId)
-            if(!table.players.includes(player)) throw 'This player is not in this game'
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
@@ -131,16 +129,16 @@ export const ServerState = () => {
             return game.getEventProcessor(event)
         },
 
-        setExpectedMove(tableId, player, types, eventProcessor) {
+        // Registers the only possible moves that are currently expected at this table and from which player
+        setExpectedMove(tableId, player, moveHandlers, eventProcessor) {
             const table = this.getTable(tableId)
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            game.setExpectedMove(player, types, eventProcessor)
+            game.setExpectedMove(player, moveHandlers, eventProcessor)
         },
 
         computePublicStates(tableId) {
-            const table = this.getTable(tableId)
             const game = this.getGame(tableId)
             game.computePublicStates()
         }
@@ -190,7 +188,7 @@ const Table = (id, creator) => ({
     },
 
     kick(player) {
-        this.players.splice(players.indexOf(player), 1)
+        this.players.splice(this.players.indexOf(player), 1)
     },
 
     start() {

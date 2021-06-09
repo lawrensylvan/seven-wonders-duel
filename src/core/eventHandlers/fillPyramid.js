@@ -1,6 +1,3 @@
-import { _ } from 'lodash' 
-import allBuildings from '../cardsInfos/buildings.json'
-import { endGame } from '../eventHandlers/endGame'
 
 // 1 = visible card, 0 = face down card, null = gap
 const pyramidStructure = {

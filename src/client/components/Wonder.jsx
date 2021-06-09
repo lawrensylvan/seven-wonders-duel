@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Flipped } from 'react-flip-toolkit'
+
 import { enterBottomLeft, enterBottomRight, fadeOut } from '../../trndgine/client/animations'
 
-export const Wonder = ({name, css, onClick, side}) => {
-
-    const [rotation] = useState(Math.round((Math.random() - 0.5) * 10))
+export const Wonder = ({name, onClick, side, otherStyle}) => {
 
     const url = require(`../assets/wonders/${name || 'zeus'}.jpg`).default
 
     const style = {
-        ...css,
-        //transform: `rotate(${rotation}deg)`,
+        ...otherStyle,
         visibility: name ? 'visible' : 'hidden'
     }
     

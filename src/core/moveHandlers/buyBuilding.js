@@ -1,5 +1,5 @@
-import { applyBuildingEffects} from './applyBuildingEffects'
-import { flipPyramidBuildings } from './flipPyramidBuildings'
+import { applyBuildingEffects} from '../eventHandlers/applyBuildingEffects'
+import { flipPyramidBuildings } from '../eventHandlers/flipPyramidBuildings'
 
 export const buyBuilding = (player, {building}) => {
     return function * (state) {

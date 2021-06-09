@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../store/actions'
 
