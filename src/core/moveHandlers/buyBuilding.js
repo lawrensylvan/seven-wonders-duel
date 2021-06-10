@@ -29,11 +29,19 @@ export const buyBuilding = (player, {building}) => {
                 if(resourceId > -1) {
                     production.splice(resourceId, 1) 
                 } else {
-                    // try to buy the resource for 2 coins + 1 coin per opponent resource on brown and gray cards only
-                    const opponentProduction = state.productionOf(state.opponentOf(player), ['brown', 'gray'])
-                    const opponentResourceCount = opponentProduction.filter(p => p === requirement).length
-                    const resourcePrice = 2 + opponentResourceCount
-                    price += resourcePrice
+                    // check if player has a special rate for that resource
+                    const permanentEffect = state.cityOf(player).permanentEffects.filter(f => f.type === 'tradeResource' && f.resource === requirement)?.[0]
+                    if(permanentEffect) {
+                        price += permanentEffect.price
+                    }
+                    // if player doesn't produce resource and has no special rate
+                    else {
+                        // try to buy the resource for 2 coins + 1 coin per opponent resource on brown and gray cards only
+                        const opponentProduction = state.productionOf(state.opponentOf(player), ['brown', 'gray'])
+                        const opponentResourceCount = opponentProduction.filter(p => p === requirement).length
+                        const resourcePrice = 2 + opponentResourceCount
+                        price += resourcePrice
+                    }
                 }
             }
         }

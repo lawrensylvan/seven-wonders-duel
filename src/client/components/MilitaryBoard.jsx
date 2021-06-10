@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flipped } from 'react-flip-toolkit'
 
-export const MilitaryBoard = ({militaryPosition, children}) => {
+export const MilitaryBoard = ({conflictPawnPosition, children}) => {
 
     const board_url = require(`../assets/militaryBoard/board-h.png`).default
     const pawn_url = require(`../assets/militaryBoard/conflictPawn-v.png`).default
@@ -19,7 +19,7 @@ export const MilitaryBoard = ({militaryPosition, children}) => {
         <div className="conflictPawnContainer">
             <Flipped flipId="conflictPawn">
                 <img className="conflictPawn" src={pawn_url} draggable="false"
-                    style={{gridColumn: `${militaryPosition + 10}/${militaryPosition + 10 + 1}`}} />
+                    style={{gridColumn: `${conflictPawnPosition + 10}/${conflictPawnPosition + 10 + 1}`}} />
             </Flipped>
         </div>
         

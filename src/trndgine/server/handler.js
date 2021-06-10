@@ -135,7 +135,6 @@ export const ActionHandler = (io) => {
                 }
             } while(moreEvents)
 
-            // TODO : should now relaunch the expectedMove.eventProcessor
             processGameEvent(tableId, eventProcessor, true)
 
         },

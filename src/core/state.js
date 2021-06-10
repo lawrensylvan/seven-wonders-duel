@@ -31,12 +31,14 @@ export const GameState = (players) => {
             wonders:            [],
             buildings:          [],
             progressTokens:     [],
+            permanentEffects:   [],
             coins:              0
         }, {
             builtWonders:       [],
             wonders:            [],
             buildings:          [],
             progressTokens:     [],
+            permanentEffects:   [],
             coins:              0
         }],
 

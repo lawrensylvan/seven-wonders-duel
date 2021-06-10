@@ -5,7 +5,7 @@ export const applyBuildingEffects = (player, building) => {
 
     const buildingEffects = {
         gainMoney,
-        goMilitary,
+        goMilitary
     }
 
     return function * (state) {
@@ -13,7 +13,12 @@ export const applyBuildingEffects = (player, building) => {
         const {immediateEffects, permanentEffects} = state.buildingInfosOn(building)
         
         if(permanentEffects) {
-            // TODO : add building permanent effects to player special powers
+            for(const effect of permanentEffects) {
+                state.cityOf(player).permanentEffects.push({
+                    source: building,
+                    ...effect,
+                })
+            }
         }
 
         // apply building immediate effects
