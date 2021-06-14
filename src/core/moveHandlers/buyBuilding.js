@@ -1,9 +1,9 @@
-import { applyBuildingEffects} from '../eventHandlers/applyBuildingEffects'
+import { applyEffects} from '../eventHandlers/applyEffects'
 import { flipPyramidBuildings } from '../eventHandlers/flipPyramidBuildings'
 
 export const buyBuilding = (player, {building}) => {
     return function * (state) {
-
+        
         // check if the building is indeed in the pyramid
         const [stageId, buildingId] = state.coordsInPyramid(building)
         if(!stageId) {
@@ -14,8 +14,8 @@ export const buyBuilding = (player, {building}) => {
         if(state.buildingsUnder(building).length) {
             throw `The building ${building} is not accessible from the pyramid`
         }
-
-        const info = state.buildingInfosOn(building)
+        
+        const info = state.infosOn(building)
         let price = info.price ?? 0
         
         // check resource requirements
@@ -56,7 +56,7 @@ export const buyBuilding = (player, {building}) => {
         state.pyramid[stageId][buildingId] = null
         state.cityOf(player).buildings.push({name: building})
 
-        yield applyBuildingEffects(player, building)
+        yield applyEffects(player, building)
 
         yield flipPyramidBuildings(stageId, buildingId)
         
