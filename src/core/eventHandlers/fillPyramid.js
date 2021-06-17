@@ -32,7 +32,7 @@ export const fillPyramid = () => {
     return function * (state) {
 
         // shuffle age deck of building
-        let ageBuildings = state.buildingDeck.filter(b => state.buildingInfosOn(b).age === state.age)
+        let ageBuildings = state.buildingDeck.filter(b => state.infosOn(b).age === state.age)
 
         // TODO : if age 3, pick 3 guilds out of 7
         

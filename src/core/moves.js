@@ -39,8 +39,8 @@ const pickGrayBuildingToDestroy = (building) => ({
     building
 })
 
-// great library
-const pickProgressToken = (progressToken) => ({
+// great library or 2 similar green symbols
+export const pickProgressToken = (progressToken) => ({
     type: 'selectProgressToken',
     progressToken
 })

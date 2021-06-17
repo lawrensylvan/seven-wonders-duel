@@ -3,7 +3,7 @@ import { Flipper } from 'react-flip-toolkit'
 import { useDispatch } from 'react-redux'
 
 import { actions } from '../../trndgine/client/store/actions'
-import { pickWonder, buyBuilding } from '../../core/moves'
+import { pickWonder, buyBuilding, pickProgressToken } from '../../core/moves'
 
 import { ProgressToken } from './ProgressToken'
 import { MilitaryBoard } from './MilitaryBoard'
@@ -66,7 +66,10 @@ export const Board = ({state, player}) => {
                 
                 {state.militaryBoard &&
                     <MilitaryBoard conflictPawnPosition={state.militaryBoard.conflictPawnPosition * (playerId ? -1 : 1)} >
-                        {state.militaryBoard.progressTokens.map((token,i) => <ProgressToken name={token} key={i} />)}
+                        {state.militaryBoard.progressTokens.map((token,i) => {
+                            return <ProgressToken name={token} key={i}
+                                                  onClick={()=>dispatch(actions.play(1, pickProgressToken(token)))} />
+                        })}
                     </MilitaryBoard>
                 }
 

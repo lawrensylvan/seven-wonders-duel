@@ -60,16 +60,10 @@ export const GameState = (players) => {
 
         // Given a game item's name, returns the full object with all item's properties loaded from the json files
 
-        buildingInfosOn(building) {
-            return buildingsInfos.filter(b => b.name === building)?.[0]
-        },
-
-        wonderInfosOn(wonder) {
-            return wondersInfo.filter(w => w.name === wonder)?.[0]
-        },
-
-        tokenInfosOn(progressToken) {
-            return tokensInfos.filter(t => t.name === progressToken)?.[0]
+        infosOn(item) {
+            return buildingsInfos.filter(b => b.name === item)?.[0] ||
+                    wondersInfos.filter(w => w.name === item)?.[0] ||
+                    tokensInfos.filter(t => t.name === item)?.[0]
         },
 
         // Returns an array [index of stage in pyramid, index of card in that stage] locating the card (or [-1, -1] if card is not in pyramid)
@@ -114,11 +108,20 @@ export const GameState = (players) => {
             return this.cities[playerId]
         },
 
+        allItemsOf(player) {
+            const city = this.cityOf(player)
+            return [...city.buildings, ...city.builtWonders, ...city.progressTokens]
+        },
+
+        scienceSymbolsOf(player) {
+            return this.allItemsOf(player).map(i => this.infosOn(i)?.scienceSymbol).filter(e => e)
+        },
+
         productionOf(player, onlyFromColors) {
             const city = this.cityOf(player)
             const buildingsProduction = city.buildings
                 .filter(b => !onlyFromColors || onlyFromColors.includes(b.color))
-                .flatMap(b => this.buildingInfosOn(b.name)?.production)
+                .flatMap(b => this.infosOn(b.name)?.production)
                 .filter(p => p)
             if(onlyFromColors) return buildingsProduction
             const wondersProduction = city.builtWonders
