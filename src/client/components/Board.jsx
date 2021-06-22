@@ -3,7 +3,7 @@ import { Flipper } from 'react-flip-toolkit'
 import { useDispatch } from 'react-redux'
 
 import { actions } from '../../trndgine/client/store/actions'
-import { pickWonder, buyBuilding, pickProgressToken } from '../../core/moves'
+import { pickWonder, buyBuilding, pickProgressToken, sellBuilding } from '../../core/moves'
 
 import { ProgressToken } from './ProgressToken'
 import { MilitaryBoard } from './MilitaryBoard'
@@ -90,6 +90,7 @@ export const Board = ({state, player}) => {
                                     return <Building    building={building} age={state.age}
                                                         key={buildingIdx} globalKey={stageIdx*10+buildingIdx}
                                                         onClick={()=>dispatch(actions.play(1, buyBuilding(building?.name)))}
+                                                        onContextMenu={()=>dispatch(actions.play(1, sellBuilding(building?.name)))}
                                             />
                                 })}
                             </div>})

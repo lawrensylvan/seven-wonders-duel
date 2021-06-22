@@ -1,4 +1,3 @@
-import { GameFlow } from '../../core/flow'
 import { ServerState } from './state'
 
 const state = ServerState()
@@ -98,7 +97,7 @@ export const ActionHandler = (io) => {
             const moveHandler = state.getExpectedMoveHandler(tableId, player, move)
             if(!moveHandler) throw 'The game is not expecting that move from you'
             // if a move of that type was expected at this moment for this player, go ahead
-            processGameEvent(tableId, GameFlow(state.getGameState(tableId))[moveHandler.name](player, move))
+            processGameEvent(tableId, state.getGameFlow(tableId)[moveHandler.name](player, move))
             // if no exception, move went fine and we can resume game flow
             const parentFlow = state.popGameFlow(tableId)
             processGameEvent(tableId, parentFlow)

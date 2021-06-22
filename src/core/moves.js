@@ -14,7 +14,7 @@ export const buyBuilding = (building) => ({
     building
 })
 
-const sellBuilding = (building) => ({
+export const sellBuilding = (building) => ({
     type: 'sellBuilding',
     building
 })
@@ -41,7 +41,7 @@ const pickGrayBuildingToDestroy = (building) => ({
 
 // great library or 2 similar green symbols
 export const pickProgressToken = (progressToken) => ({
-    type: 'selectProgressToken',
+    type: 'pickProgressToken',
     progressToken
 })
 

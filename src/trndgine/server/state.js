@@ -120,6 +120,13 @@ export const ServerState = () => {
             return game.getGameStatePatch4(player)
         },
 
+        getGameFlow(tableId) {
+            const table = this.getTable(tableId)
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            const game = this.getGame(tableId)
+            return game.getGameFlow()
+        },
+
         // Registers the only possible moves that are currently expected at this table and from which player
         registerExpectedMove(tableId, player, moveHandlers, gameFlow) {
             const table = this.getTable(tableId)

@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import { expect } from '../trndgine/server/expect'
 
-export const GameFlow = (gameState) => ({
+export const GameFlow = (state) => ({
 
-    state : gameState,
+    state : state,
 
     startGame : function * () {
         
@@ -35,7 +35,7 @@ export const GameFlow = (gameState) => ({
             while(!this.state.pyramidIsEmpty()) {
                 const player = this.state.players[this.state.toPlay]
                 
-                yield expect(player, this.buyBuilding)
+                yield expect(player, this.buyBuilding, this.sellBuilding)
                 
                 yield * this.swapTurns()
             }
@@ -49,12 +49,14 @@ export const GameFlow = (gameState) => ({
         for(let i = 0; i < amount; ++i) {
             this.state.militaryBoard.progressTokens[i] = this.state.progressTokenDeck.pop()
         }
+        yield
     },
 
     drawWonders : function * (amount) {
         for(let i = 0; i < amount; ++i) {
             this.state.wondersToSelect[i] = this.state.wonderDeck.pop()
         }
+        yield
     },
 
     pickWonder: function * (player, {wonder}) {
@@ -64,10 +66,12 @@ export const GameFlow = (gameState) => ({
         // move wonder from deck to player
         this.state.cityOf(player).wonders.push(wonder)
         this.state.wondersToSelect[this.state.wondersToSelect.indexOf(wonder)] = null
+        yield
     },
 
     gainMoney : function * (player, coins) {
         this.state.cityOf(player).coins += coins
+        yield
     },
 
     fillPyramid : function * () {
@@ -114,6 +118,8 @@ export const GameFlow = (gameState) => ({
             if(code === 1) return {name}
             else return {name, isFaceDown: true}
         }))
+
+        yield
     },
 
     buyBuilding: function * (player, {building}) {
@@ -165,10 +171,12 @@ export const GameFlow = (gameState) => ({
             throw `You don't have enough coin to buy the ${building}`
         }
         this.state.cityOf(player).coins -= price
+        yield
 
         // move building from pyramid to player
         this.state.pyramid[stageId][buildingId] = null
         this.state.cityOf(player).buildings.push({name: building})
+        yield
 
         yield * this.applyEffects(player, building)
 
@@ -176,20 +184,42 @@ export const GameFlow = (gameState) => ({
         
     },
 
-    applyEffects: function * (player, item) {
-        const availableEffects = {
-            gainMoney: this.gainMoney,
-            goMilitary: this.goMilitary
+    sellBuilding: function * (player, {building}) {
+        // check if the building is indeed in the pyramid
+        const [stageId, buildingId] = this.state.coordsInPyramid(building)
+        if(!stageId) {
+            throw `The building ${building} is not in the pyramid`
         }
+
+        // check if there is any building in the bottom stage that would block this building
+        if(this.state.buildingsUnder(building).length) {
+            throw `The building ${building} is not accessible from the pyramid`
+        }
+        
+        // move building from pyramid to discard pile
+        this.state.pyramid[stageId][buildingId] = null
+        this.state.discardPile.push(building)
+        yield
+        
+        // give 1 coin + 1 more for each yellow card in player's city
+        const yellowCardsCount = this.state.cityOf(player).buildings
+            .map(b => this.state.infosOn(b.name))
+            .filter(b => b.color === 'yellow')
+            .length
+        const reward = 2 + yellowCardsCount
+        yield * this.gainMoney(player, reward)
+    },
+
+    applyEffects: function * (player, item) {
         const {immediateEffects, permanentEffects, scienceSymbol} = this.state.infosOn(item)
 
         // apply item common permanent effects (nothing to do for victory points or production, but still for science symbols)
         if(scienceSymbol) {
             const scienceSymbols = this.state.scienceSymbolsOf(player)
             // if player has 2 same similar symbols, he gets a progress token
-            if(scienceSymbols.some(s => s === scienceSymbol)) {
+            //if(scienceSymbols.some(s => s === scienceSymbol)) {
                 yield expect(player, this.pickProgressToken)
-            }
+            //}
 
             // if player has 6 different symbols, he wins instantly
             if(_.uniq(scienceSymbols).length >= 6) {
@@ -209,11 +239,9 @@ export const GameFlow = (gameState) => ({
 
         // apply item immediate effects
         if(immediateEffects) {
-            for(const effect of immediateEffects) {
-                const event = availableEffects[effect.type]
-                if(!event) throw `Internal error : the "${effect.type}" immediate effect of card ${item} is not defined in the rules !`
-                const {type, ...args} = effect
-                yield * event(player, ...Object.values(args)) // we add player to effect properties to call the action
+            for(const {type, ...args} of immediateEffects) {
+                if(!this[type]) throw `Internal error : the "${type}" immediate effect of card ${item} is not defined in the rules !`
+                yield * this[type](player, ...Object.values(args)) // we add player to effect properties to call the action
             }
         }
     },
@@ -224,18 +252,19 @@ export const GameFlow = (gameState) => ({
         if(finalPosition < -9) finalPosition = -9
 
         this.state.militaryBoard.conflictPawnPosition = finalPosition
+        yield
 
         // TODO : lose money effects
 
         // TODO : military victory
         if(finalPosition === 9) {
-            yield this.militaryVictory(player)
+            yield * this.militaryVictory(player)
             return
         }
         if(finalPosition === -9) {
-            yield this.militaryVictory(this.state.opponentOf(player))
-            return
+            yield * this.militaryVictory(this.state.opponentOf(player))
         }
+        
     },
 
     pickProgressToken: function * (player, {progressToken}) {
@@ -244,7 +273,7 @@ export const GameFlow = (gameState) => ({
         
         // move token from deck to player
         this.state.cityOf(player).progressTokens.push(progressToken)
-        this.state.militaryBoard.progressTokens[this.state.militaryBoard.progressTokens.indexOf(progressToken)]
+        this.state.militaryBoard.progressTokens[this.state.militaryBoard.progressTokens.indexOf(progressToken)] = null
 
         // apply tokens effect
         yield * this.applyEffects(player, progressToken) // TODO
@@ -256,6 +285,7 @@ export const GameFlow = (gameState) => ({
             .buildingsAboveCoords(stageId, buildingId)
             ?.filter(cardAbove => !this.state.buildingsUnder(cardAbove.name).length)
             .forEach(c => delete c.isFaceDown)
+        yield
     },
 
     swapTurns: function * () {
@@ -264,6 +294,7 @@ export const GameFlow = (gameState) => ({
 
     endGame : function * () {
         // TODO : count the victory points
+        yield
     }
 
 })

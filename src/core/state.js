@@ -6,6 +6,8 @@ import tokensInfos from '../core/cardsInfos/tokens.json'
 
 export const GameState = (players) => ({
 
+    /*** Game state structure ***/
+
     players: players,
     toPlay: 0,
 
@@ -40,6 +42,24 @@ export const GameState = (players) => ({
         coins:              0
     }],
 
+    /*** Game state structure ***/
+
+    getPublicState4(player) {
+        let publicState = JSON.parse(JSON.stringify(this))
+        
+        // hide the names of the buildings that are face down
+        publicState.pyramid = publicState.pyramid.map(stage => stage.map(card => {
+            return card === null ? null : {
+                name: card?.isFaceDown ? null : card?.name,
+                isFaceDown: card?.isFaceDown,
+                isGuild: buildingsInfos.filter(b=>b.age===publicState.age && b.color==='purple').map(b=>b.name).includes(card?.name)
+            }
+        }))
+        return publicState
+    },
+
+    /*** Utility functions ***/
+
     // Returns the id of a player from its name (or from its id, in which case it just returns that id)
     idOf(player) {
         return typeof player === 'number' ? player : this.players.indexOf(player)
@@ -57,7 +77,6 @@ export const GameState = (players) => ({
     },
 
     // Given a game item's name, returns the full object with all item's properties loaded from the json files
-
     infosOn(item) {
         return buildingsInfos.filter(b => b.name === item)?.[0] ||
                 wondersInfos.filter(w => w.name === item)?.[0] ||
@@ -130,20 +149,6 @@ export const GameState = (players) => ({
 
     pyramidIsEmpty() {
         return this.pyramid.every(stage => stage.filter(b => b).length === 0)
-    },
-
-    getPublicState(player) {
-        let publicState = JSON.parse(JSON.stringify(this))
-        
-        // hide the names of the buildings that are face down
-        publicState.pyramid = publicState.pyramid.map(stage => stage.map(card => {
-            return card === null ? null : {
-                name: card?.isFaceDown ? null : card?.name,
-                isFaceDown: card?.isFaceDown,
-                isGuild: buildingsInfos.filter(b=>b.age===publicState.age && b.color==='purple').map(b=>b.name).includes(card?.name)
-            }
-        }))
-        return publicState
     }
 
 })

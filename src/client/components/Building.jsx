@@ -4,7 +4,7 @@ import { Flipped } from 'react-flip-toolkit'
 import buildingsInfos from '../../core/cardsInfos/buildings.json'
 import { fadeIn } from '../../trndgine/client/animations'
 
-export const Building = ({building, age, css, globalKey, onClick}) => {
+export const Building = ({building, age, css, globalKey, onClick, onContextMenu}) => {
 
     const isEmptySlot = building === null
     const name = building?.name
@@ -37,7 +37,9 @@ export const Building = ({building, age, css, globalKey, onClick}) => {
     const playable = !isUnknown && !isFaceDown
 
     return <Flipped flipId={flipId} onAppear={enterAnimation} onExit={exitAnimation} style={{perspective: "600px"}} transformOrigin="center" >
-                <div className={`card3DContainer card building ${color} ${playable ? 'playable' : 'notplayable'}`} onClick={playable ? onClick : null} >
+                <div className={`card3DContainer card building ${color} ${playable ? 'playable' : 'notplayable'}`}
+                    onClick={playable ? onClick : null}
+                    onContextMenu={playable ? onContextMenu : null} >
                     <img className="front" src={isFaceDown ? backImage : frontImage} draggable="false" style={style} />
                     <img className="back" src={isFaceDown ? frontImage : backImage} draggable="false" style={style}  />
                 </div>

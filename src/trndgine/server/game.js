@@ -6,6 +6,7 @@ import { GameFlow } from '../../core/flow'
 export const Game = (players, tableId) => {
 
     let state = GameState(players)
+    let flow = GameFlow(state)
     let publicStates = {}
     let cachedPublicStates = {}
     let expectedMove = {}
@@ -15,8 +16,10 @@ export const Game = (players, tableId) => {
 
         id: tableId,
 
-        state: state,
-        
+        getGameFlow() {
+            return flow
+        },
+
         registerExpectedMove(player, moveHandlers, gameFlow) {
             expectedMove = {
                 player, moveHandlers
@@ -34,12 +37,12 @@ export const Game = (players, tableId) => {
         },
 
         computePublicStates() {
-            publicStates = players.map(p => state.getPublicState(p))
+            publicStates = players.map(p => state.getPublicState4(p))
         },
 
         getGameState4 : (player) => {
             if(!publicStates[player]) {
-                publicStates[player] = state.getPublicState(player)
+                publicStates[player] = state.getPublicState4(player)
             }
             cachedPublicStates[player] = publicStates[player]
             return publicStates[player]
@@ -48,7 +51,7 @@ export const Game = (players, tableId) => {
         getGameStatePatch4 : (player) => {
             const oldState = cachedPublicStates[player] || [] // todo : player is the name, should use id !
             if(!publicStates[player]) {
-                publicStates[player] = state.getPublicState(player)
+                publicStates[player] = state.getPublicState4(player)
             }
             const newState = publicStates[player]
             const patch = compare(oldState, newState)
@@ -57,7 +60,7 @@ export const Game = (players, tableId) => {
         },
 
         getFirstGameEvent : () => {
-            return GameFlow(state).startGame() // TODO : IOC
+            return flow.startGame() // TODO : IOC
         }
 
     }
