@@ -95,6 +95,13 @@ export const ServerState = () => {
             return game.getFirstGameEvent()
         },
 
+        getGameState(tableId) {
+            const table = this.getTable(tableId)
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            const game = this.getGame(tableId)
+            return game.state
+        },
+
         getGameState4(player, tableId) {
             this.checkPlayerExists(player)
             const table = this.getTable(tableId)
@@ -113,29 +120,29 @@ export const ServerState = () => {
             return game.getGameStatePatch4(player)
         },
 
-        getExpectedMove(tableId) {
-            const table = this.getTable(tableId)
-            if(!table.hasStarted()) throw 'The game has not started yet'
-            if(table.isOver()) throw 'The game is over'
-            const game = this.getGame(tableId)
-            return game.getExpectedMove()
-        },
-
-        getEventProcessor(tableId, event) {
-            const table = this.getTable(tableId)
-            if(!table.hasStarted()) throw 'The game has not started yet'
-            if(table.isOver()) throw 'The game is over'
-            const game = this.getGame(tableId)
-            return game.getEventProcessor(event)
-        },
-
         // Registers the only possible moves that are currently expected at this table and from which player
-        setExpectedMove(tableId, player, moveHandlers, eventProcessor) {
+        registerExpectedMove(tableId, player, moveHandlers, gameFlow) {
             const table = this.getTable(tableId)
             if(!table.hasStarted()) throw 'The game has not started yet'
             if(table.isOver()) throw 'The game is over'
             const game = this.getGame(tableId)
-            game.setExpectedMove(player, moveHandlers, eventProcessor)
+            game.registerExpectedMove(player, moveHandlers, gameFlow)
+        },
+
+        getExpectedMoveHandler(tableId, player, move) {
+            const table = this.getTable(tableId)
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            if(table.isOver()) throw 'The game is over'
+            const game = this.getGame(tableId)
+            return game.getExpectedMoveHandler(player, move)
+        },
+
+        popGameFlow(tableId) {
+            const table = this.getTable(tableId)
+            if(!table.hasStarted()) throw 'The game has not started yet'
+            if(table.isOver()) throw 'The game is over'
+            const game = this.getGame(tableId)
+            return game.popGameFlow()
         },
 
         computePublicStates(tableId) {

@@ -1,36 +1,40 @@
 import { compare } from 'fast-json-patch'
 
 import { GameState } from '../../core/state' // TODO : IOC
-import { startGame } from '../../core/eventHandlers/startGame'
+import { GameFlow } from '../../core/flow'
 
 export const Game = (players, tableId) => {
 
-    const state = GameState(players)
+    let state = GameState(players)
     let publicStates = {}
     let cachedPublicStates = {}
     let expectedMove = {}
+    let gameFlowStack = []
 
     return {
 
         id: tableId,
 
-        getExpectedMove() {
-            return expectedMove
+        state: state,
+        
+        registerExpectedMove(player, moveHandlers, gameFlow) {
+            expectedMove = {
+                player, moveHandlers
+            }
+            gameFlowStack.push(gameFlow)
         },
 
-        setExpectedMove(player, moveHandlers, eventProcessor) {
-            expectedMove = {
-                player, moveHandlers, eventProcessor
-            }
+        getExpectedMoveHandler(player, move) {
+            if(expectedMove.player !== player) return null
+            return expectedMove.moveHandlers.filter(m => m.name === move.type)?.[0]
+        },
+
+        popGameFlow() {
+            return gameFlowStack.pop()
         },
 
         computePublicStates() {
             publicStates = players.map(p => state.getPublicState(p))
-        },
-
-        getEventProcessor(event) {
-            if(!event) throw 'Internal error : this game event does not exist'
-            return event(state)
         },
 
         getGameState4 : (player) => {
@@ -53,7 +57,7 @@ export const Game = (players, tableId) => {
         },
 
         getFirstGameEvent : () => {
-            return startGame() // TODO : IOC
+            return GameFlow(state).startGame() // TODO : IOC
         }
 
     }
